@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Project.Scripts.Gameplay.Zip.Configs
 {
-    public class ZimBoardConfig : ScriptableObject
+    public class ZipBoardConfig : ScriptableObject
     {
         [field: SerializeField] public Vector2Int Size { get; private set; }
         [field: SerializeField] public Vector2Int[] CheckpointIndexes { get; private set; }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.Gameplay.Levels
+namespace Project.Scripts.Gameplay.Levels
 {
     public interface ILevelDataProvider
     {

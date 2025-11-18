@@ -1,13 +1,13 @@
-using Code.Gameplay.Cameras.Provider;
-using Code.Gameplay.Common.Random;
-using Code.Gameplay.Common.Time;
-using Code.Gameplay.Input.Service;
-using Code.Gameplay.Levels;
-using Code.Gameplay.StaticData;
 using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.Loading;
 using Code.Infrastructure.States.GameStates;
 using Code.Infrastructure.States.StateMachine;
+using Project.Scripts.Gameplay.Cameras.Provider;
+using Project.Scripts.Gameplay.Common.Random;
+using Project.Scripts.Gameplay.Common.Time;
+using Project.Scripts.Gameplay.Input.Service;
+using Project.Scripts.Gameplay.Levels;
+using Project.Scripts.Gameplay.StaticData;
 using Zenject;
 
 namespace Code.Infrastructure.Installers

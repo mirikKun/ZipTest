@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Code.Gameplay.Windows.Configs
+namespace Project.Scripts.Gameplay.Windows.Configs
 {
     [Serializable]
     public class WindowConfig

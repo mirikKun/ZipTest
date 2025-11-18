@@ -1,6 +1,6 @@
-﻿using Code.Gameplay.StaticData;
-using Code.Infrastructure.States.StateInfrastructure;
+﻿using Code.Infrastructure.States.StateInfrastructure;
 using Code.Infrastructure.States.StateMachine;
+using Project.Scripts.Gameplay.StaticData;
 
 namespace Code.Infrastructure.States.GameStates
 {

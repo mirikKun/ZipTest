@@ -1,7 +1,7 @@
-﻿using Code.Gameplay.Windows;
+﻿using Project.Scripts.Gameplay.Windows;
 using UnityEngine;
 
-namespace Code.Gameplay.StaticData
+namespace Project.Scripts.Gameplay.StaticData
 {
     public interface IStaticDataService
     {

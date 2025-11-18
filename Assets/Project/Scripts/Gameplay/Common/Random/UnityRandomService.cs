@@ -1,4 +1,4 @@
-namespace Code.Gameplay.Common.Random
+namespace Project.Scripts.Gameplay.Common.Random
 {
     public class UnityRandomService : IRandomService
     {

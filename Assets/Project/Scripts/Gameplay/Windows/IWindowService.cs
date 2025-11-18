@@ -1,4 +1,4 @@
-﻿namespace Code.Gameplay.Windows
+﻿namespace Project.Scripts.Gameplay.Windows
 {
     public interface IWindowService
     {

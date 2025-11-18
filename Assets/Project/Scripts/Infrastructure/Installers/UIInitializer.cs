@@ -1,4 +1,4 @@
-using Code.Gameplay.Windows;
+using Project.Scripts.Gameplay.Windows;
 using UnityEngine;
 using Zenject;
 

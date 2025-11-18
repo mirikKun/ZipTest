@@ -1,8 +1,8 @@
-﻿using Code.Gameplay.StaticData;
+﻿using Project.Scripts.Gameplay.StaticData;
 using UnityEngine;
 using Zenject;
 
-namespace Code.Gameplay.Windows
+namespace Project.Scripts.Gameplay.Windows
 {
     public class WindowFactory : IWindowFactory
     {

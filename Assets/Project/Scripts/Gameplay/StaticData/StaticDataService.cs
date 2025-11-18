@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Code.Gameplay.Windows;
-using Code.Gameplay.Windows.Configs;
+using Project.Scripts.Gameplay.Windows;
+using Project.Scripts.Gameplay.Windows.Configs;
 using UnityEngine;
 
-namespace Code.Gameplay.StaticData
+namespace Project.Scripts.Gameplay.StaticData
 {
     public class StaticDataService : IStaticDataService
     {

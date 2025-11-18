@@ -1,6 +1,6 @@
-using Code.Gameplay.Levels;
 using Code.Infrastructure.States.StateInfrastructure;
 using Code.Infrastructure.States.StateMachine;
+using Project.Scripts.Gameplay.Levels;
 
 namespace Code.Infrastructure.States.GameStates
 {

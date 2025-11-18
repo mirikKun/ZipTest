@@ -1,5 +1,5 @@
-﻿using Code.Gameplay.Cameras.Provider;
-using Code.Gameplay.Levels;
+﻿using Project.Scripts.Gameplay.Cameras.Provider;
+using Project.Scripts.Gameplay.Levels;
 using UnityEngine;
 using Zenject;
 
