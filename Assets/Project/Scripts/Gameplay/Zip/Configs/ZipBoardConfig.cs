@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Project.Scripts.Gameplay.Zip.Configs
 {
+    [CreateAssetMenu(fileName = "ZipBoardConfig", menuName = "Configs/Zip/ZipBoardConfig", order = 0)]
     public class ZipBoardConfig : ScriptableObject
     {
         [field: SerializeField] public Vector2Int Size { get; private set; }
@@ -12,6 +13,8 @@ namespace Project.Scripts.Gameplay.Zip.Configs
         [field: SerializeField] public ZipCellWallsConfig[] Walls { get; private set; }
         [field: SerializeField] public Vector2Int StartPosition { get; private set; }
 
+        public int Width => Size.x;
+        public int Height => Size.y;
 
         public ZipDefaultCell[,] GetCells()
         {
@@ -25,7 +28,6 @@ namespace Project.Scripts.Gameplay.Zip.Configs
                 }
             }
 
-            cells[StartPosition.x, StartPosition.y] = new ZipDefaultCell(ZipCellType.StartPoint, StartPosition,haveRightWall:HaveRightWall(StartPosition),haveDownWall:HaveDownWall(StartPosition));
             for (var i = 0; i < CheckpointIndexes.Length; i++)
             {
                 Vector2Int checkpointIndex = CheckpointIndexes[i];
