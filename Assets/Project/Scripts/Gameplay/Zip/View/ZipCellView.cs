@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using Project.Scripts.Gameplay.Zip.Board;
 using Project.Scripts.Gameplay.Zip.Enums;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Project.Scripts.Gameplay.Zip.View
 {
     public class ZipCellView : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _backGround;
+        [SerializeField] private SpriteRenderer _frame;
         [SerializeField] private float _spriteScaleMultiplier = 1.1f;
         [SerializeField] private ZipLineView _line;
         [SerializeField] private ZipCheckPointView _checkPoint;
         [SerializeField] private BoxCollider2D _collider;
 
-        [SerializeField] private ZipCellBackgroundSprite[] _cellBackgrounds;
+        [SerializeField] private ZipCellSprites[] _cellBackgrounds;
 
         private ZipDefaultCell _cell;
         private float _spritePixelPerUnit = 100;
@@ -35,20 +35,26 @@ namespace Project.Scripts.Gameplay.Zip.View
                 }
             }
 
-            float scale = (1 / (_backGround.sprite.rect.height / _spritePixelPerUnit)) * size;
-            _backGround.transform.localScale = Vector3.one * _spriteScaleMultiplier * scale;
+            float scale = (1 / (_frame.sprite.rect.height / _spritePixelPerUnit)) * size;
+            _frame.transform.localScale = Vector3.one * _spriteScaleMultiplier * scale;
             _line.SetScale(scale);
-            _collider.size = Vector2.one*size;
+            _collider.size = Vector2.one * size;
             UpdateSprite(cell.Position, boardSize);
         }
 
         public void UpdateCell(ZipCurrentCell cell, List<ZipCurrentCell> lineCells)
         {
             _line.gameObject.SetActive(cell.StepIndex >= 0);
+            _backGround.gameObject.SetActive(cell.StepIndex >= 0);
             if (cell.StepIndex >= 0)
             {
                 _line.UpdateLineSprite(lineCells, cell.StepIndex);
             }
+        }
+
+        public void OnCheckpointReached()
+        {
+            _checkPoint.OnCheckPointReached();
         }
 
         private void OnMouseDown()
@@ -69,41 +75,46 @@ namespace Project.Scripts.Gameplay.Zip.View
         {
             if (position.x == 0 && position.y == 0)
             {
-                _backGround.sprite = GetSprite(CellBackgroundSpriteType.LeftDown);
+                SetSpritesByType(CellBackgroundSpriteType.LeftDown);
             }
             else if (position.x == 0 && position.y == size.y - 1)
             {
-                _backGround.sprite = GetSprite(CellBackgroundSpriteType.LeftUp);
+                SetSpritesByType(CellBackgroundSpriteType.LeftUp);
             }
             else if (position.x == size.x - 1 && position.y == size.y - 1)
             {
-                _backGround.sprite = GetSprite(CellBackgroundSpriteType.RightUp);
+                SetSpritesByType(CellBackgroundSpriteType.RightUp);
             }
             else if (position.x == size.x - 1 && position.y == 0)
             {
-                _backGround.sprite = GetSprite(CellBackgroundSpriteType.RightDown);
+                SetSpritesByType(CellBackgroundSpriteType.RightDown);
             }
             else
             {
-                _backGround.sprite = GetSprite(CellBackgroundSpriteType.Center);
+                SetSpritesByType(CellBackgroundSpriteType.Center);
             }
         }
 
-        private Sprite GetSprite(CellBackgroundSpriteType spriteType)
+        private void SetSpritesByType(CellBackgroundSpriteType spriteType)
         {
             foreach (var cellBackground in _cellBackgrounds)
             {
-                if (cellBackground._spriteType == spriteType) return cellBackground.Sprite;
-            }
+                if (cellBackground.SpriteType == spriteType)
+                {
+                    _frame.sprite = cellBackground.FrameSprite;
+                    _backGround.sprite = cellBackground.BackgroundSprite;
 
-            return null;
+                    return;
+                }
+            }
         }
     }
 
     [Serializable]
-    public class ZipCellBackgroundSprite
+    public class ZipCellSprites
     {
-        public Sprite Sprite;
-        public CellBackgroundSpriteType _spriteType;
+        public Sprite FrameSprite;
+        public Sprite BackgroundSprite;
+        public CellBackgroundSpriteType SpriteType;
     }
 }

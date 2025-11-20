@@ -34,6 +34,7 @@ namespace Project.Scripts.Gameplay.Zip.View
             ClearBoard();
             _board = new ZipBoard(config);
             _board.OnCellChanged += OnCellChanged;
+            _board.CheckpointReached += OnCheckpointReached;
             _board.BoardFinished += OnBoardFinished;
             _board.OrderBecameWrong += OnOrderBecameWrong;
             _board.OrderBecameCorrect += OnOrderBecameCorrect;
@@ -48,7 +49,7 @@ namespace Project.Scripts.Gameplay.Zip.View
             {
                 for (int y = 0; y < config.Height; y++)
                 {
-                    Vector3 centerOffset = _boardSize / 2;
+                    Vector3 centerOffset = _boardSize / 2-Vector2.one*cellSize/2;
                     Vector3 position = _grid.CellToWorld(new Vector3Int(x, y, 0)) +
                         new Vector3(_offset.x, _offset.y, 0) - centerOffset;
                     ZipCellView cell = Instantiate(_cellPrefab, position, Quaternion.identity, transform);
@@ -65,11 +66,17 @@ namespace Project.Scripts.Gameplay.Zip.View
             _wrongOrderLabel.SetActive(false);
         }
 
+        private void OnCheckpointReached(ZipCurrentCell cell)
+        {
+            _cells[cell.Position.x, cell.Position.y].OnCheckpointReached();
+        }
+
         private void OnOrderBecameCorrect()
         {
             _wrongOrderLabel.SetActive(false);
         }
 
+     
         private void OnOrderBecameWrong()
         {
             _wrongOrderLabel.SetActive(true);

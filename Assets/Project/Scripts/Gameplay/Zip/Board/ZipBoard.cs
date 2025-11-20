@@ -24,6 +24,7 @@ namespace Project.Scripts.Gameplay.Zip.Board
 
         public event Action<ZipCurrentCell, List<ZipCurrentCell>> OnCellChanged;
         public event Action BoardFinished;
+        public event Action<ZipCurrentCell> CheckpointReached;
         public event Action OrderBecameWrong;
         public event Action OrderBecameCorrect;
 
@@ -67,7 +68,7 @@ namespace Project.Scripts.Gameplay.Zip.Board
 
         public void TryMoveToPoint(Vector2Int point, bool canGoBack = true)
         {
-            if (!IsValidPosition(point)) return;
+            if (!IsValidPosition(point)||_isFinished) return;
 
             if (_zipCurrentCells[point.x, point.y].StepIndex >= 0 && canGoBack)
             {
@@ -173,6 +174,10 @@ namespace Project.Scripts.Gameplay.Zip.Board
             }
 
             _checkpoints.Add(cell);
+            if (_isOrderCorrect)
+            {
+                CheckpointReached?.Invoke(_zipCurrentCells[cell.Position.x, cell.Position.y]);
+            }
         }
 
         private void RemoveCheckpoint(ZipDefaultCell cell)
@@ -238,7 +243,7 @@ namespace Project.Scripts.Gameplay.Zip.Board
 
         private bool CanMoveBackward(Vector2Int currentPosition, Vector2Int previousPosition)
         {
-            return _zipCurrentCells[previousPosition.x, previousPosition.y].StepIndex > 0 &&
+            return _zipCurrentCells[previousPosition.x, previousPosition.y].StepIndex >= 0 &&
                    _zipCurrentCells[currentPosition.x, currentPosition.y].StepIndex ==
                    _zipCurrentCells[previousPosition.x, previousPosition.y].StepIndex +1;
         }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Project.Scripts.Gameplay.Windows.WindowTypes;
 using Project.Scripts.Gameplay.Zip.Configs;
 using Project.Scripts.Gameplay.Zip.View;
@@ -13,6 +14,7 @@ namespace Code.Infrastructure
         [SerializeField] private GameObject _hud;
         [SerializeField] private WinMenu _winMenu;
         [SerializeField] private ZipBoardView _board;
+        [SerializeField] private ZipBoardEffects _boardEffects;
 
 
         private int _currentBoardIndex;
@@ -40,6 +42,13 @@ namespace Code.Infrastructure
 
         private void OnLevelFinished(float timeUsed)
         {
+            StartCoroutine(LevelFinishing(timeUsed));
+   
+        }
+
+        private IEnumerator LevelFinishing(float timeUsed)
+        {
+            yield return _boardEffects.PlayFinishAnimation();
             _currentBoardIndex++;
             _winMenu.gameObject.SetActive(true);
             _hud.SetActive(false);

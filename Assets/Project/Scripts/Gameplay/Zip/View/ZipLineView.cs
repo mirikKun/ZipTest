@@ -8,14 +8,15 @@ namespace Project.Scripts.Gameplay.Zip.View
 {
     public class ZipLineView : MonoBehaviour
     {
-        [SerializeField] private ZipLineSprite[] _lineSprites;
         [SerializeField] private SpriteRenderer _line;
+        [SerializeField] private SpriteMask _spriteMask;
+        [SerializeField] private ZipLineSprite[] _lineSprites;
 
         public void UpdateLineSprite(List<ZipCurrentCell> lineCells, int index)
         {
             if (lineCells.Count == 1)
             {
-                _line.sprite = GetSprite(LineSpriteType.Start);
+                 SetSprite(LineSpriteType.Start);
             }
             else if (index == 0)
             {
@@ -39,11 +40,11 @@ namespace Project.Scripts.Gameplay.Zip.View
         {
             if (offset == Vector2Int.right * 2 || offset == Vector2Int.left * 2)
             {
-                _line.sprite = GetSprite(LineSpriteType.StraightHorizontal);
+                 SetSprite(LineSpriteType.StraightHorizontal);
             }
             else if (offset == Vector2Int.up * 2 || offset == Vector2Int.down * 2)
             {
-                _line.sprite = GetSprite(LineSpriteType.StraightVertical);
+                 SetSprite(LineSpriteType.StraightVertical);
             }
         }
 
@@ -54,22 +55,22 @@ namespace Project.Scripts.Gameplay.Zip.View
             if ((totalOffset.x == 1 && totalOffset.y == 1 && currentOffset.y == 1)
                 || (totalOffset.x == -1 && totalOffset.y == -1 && currentOffset.x == -1))
             {
-                _line.sprite = GetSprite(LineSpriteType.AngleLeftUp);
+                 SetSprite(LineSpriteType.AngleLeftUp);
             }
             else if ((totalOffset.x == 1 && totalOffset.y == -1 && currentOffset.x == 1) ||
                      (totalOffset.x == -1 && totalOffset.y == 1 && currentOffset.y == 1))
             {
-                _line.sprite = GetSprite(LineSpriteType.AngleRightUp);
+                 SetSprite(LineSpriteType.AngleRightUp);
             }
             else if ((totalOffset.x == -1 && totalOffset.y == 1 && currentOffset.x == -1)
                      || (totalOffset.x == 1 && totalOffset.y == -1 && currentOffset.y == -1))
             {
-                _line.sprite = GetSprite(LineSpriteType.AngleLeftDown);
+                 SetSprite(LineSpriteType.AngleLeftDown);
             }
             else if ((totalOffset.x == -1 && totalOffset.y == -1 && currentOffset.y == -1)
                      || (totalOffset.x == 1 && totalOffset.y == 1 && currentOffset.x == 1))
             {
-                _line.sprite = GetSprite(LineSpriteType.AngleRightDown);
+                 SetSprite(LineSpriteType.AngleRightDown);
             }
         }
 
@@ -77,30 +78,33 @@ namespace Project.Scripts.Gameplay.Zip.View
         {
             if (offset == Vector2Int.right)
             {
-                _line.sprite = GetSprite(LineSpriteType.CurrentRight);
+                 SetSprite(LineSpriteType.CurrentRight);
             }
             else if (offset == Vector2Int.left)
             {
-                _line.sprite = GetSprite(LineSpriteType.CurrentLeft);
+                 SetSprite(LineSpriteType.CurrentLeft);
             }
             else if (offset == Vector2Int.up)
             {
-                _line.sprite = GetSprite(LineSpriteType.CurrentUp);
+                 SetSprite(LineSpriteType.CurrentUp);
             }
             else if (offset == Vector2Int.down)
             {
-                _line.sprite = GetSprite(LineSpriteType.CurrentDown);
+                 SetSprite(LineSpriteType.CurrentDown);
             }
         }
 
-        private Sprite GetSprite(LineSpriteType spriteType)
+        private void SetSprite(LineSpriteType spriteType)
         {
             foreach (var cellBackground in _lineSprites)
             {
-                if (cellBackground.SpriteType == spriteType) return cellBackground.Sprite;
+                if (cellBackground.SpriteType == spriteType)
+                {
+                    _line.sprite= cellBackground.Sprite;
+                    _spriteMask.sprite= cellBackground.Sprite;
+                }
             }
 
-            return null;
         }
 
         public void SetScale(float scale)
