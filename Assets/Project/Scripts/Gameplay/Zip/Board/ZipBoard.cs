@@ -77,18 +77,20 @@ namespace Project.Scripts.Gameplay.Zip.Board
             {
                 int steps = Mathf.Abs(point.y - _currentPosition.y);
                 Direction direction = point.y > _currentPosition.y ? Direction.Up : Direction.Down;
-                Move(direction, steps, canGoBack);
+                Move(direction, steps);
             }
             else if (point.y == _currentPosition.y)
             {
                 int steps = Mathf.Abs(point.x - _currentPosition.x);
                 Direction direction = point.x > _currentPosition.x ? Direction.Right : Direction.Left;
-                Move(direction, steps, canGoBack);
+                Move(direction, steps);
             }
         }
 
         public void Move(Direction direction, int steps = 1, bool canGoBack = true)
         {
+            //Debug.Log($"Move {direction} {steps}");
+
             if (steps <= 0) return;
             for (int i = 0; i < steps; i++)
             {
@@ -125,7 +127,7 @@ namespace Project.Scripts.Gameplay.Zip.Board
             _lineCells.Remove(_zipCurrentCells[_currentPosition.x, _currentPosition.y]);
             OnCellChanged?.Invoke(_zipCurrentCells[_currentPosition.x, _currentPosition.y], _lineCells);
             _currentPosition = nextPosition;
-            _zipCurrentCells[_currentPosition.x, _currentPosition.y].SetPreviousCell(null);
+            //_zipCurrentCells[_currentPosition.x, _currentPosition.y].SetPreviousCell(null);
         }
 
         private void MoveBackwardsUntilPoint(Vector2Int point)
@@ -214,7 +216,7 @@ namespace Project.Scripts.Gameplay.Zip.Board
         private bool IsValidPosition(Vector2Int position)
         {
             return position.x >= 0 && position.x < _size.x &&
-                   position.y >= 0 && position.y < _size.y;
+                   position.y >= 0 && position.y < _size.y &&position!=_currentPosition;
         }
 
         private bool HaveWall(Vector2Int currentPosition, Direction direction)
@@ -238,7 +240,7 @@ namespace Project.Scripts.Gameplay.Zip.Board
         {
             return _zipCurrentCells[previousPosition.x, previousPosition.y].StepIndex > 0 &&
                    _zipCurrentCells[currentPosition.x, currentPosition.y].StepIndex ==
-                   _zipCurrentCells[previousPosition.x, previousPosition.y].StepIndex - 1;
+                   _zipCurrentCells[previousPosition.x, previousPosition.y].StepIndex +1;
         }
     }
 }

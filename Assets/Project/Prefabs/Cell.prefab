@@ -482,6 +482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.Zip.View.ZipCellView
   _backGround: {fileID: 1868674922579399417}
+  _spriteScaleMultiplier: 1.02
   _line: {fileID: 4827969820922919522}
   _checkPoint: {fileID: 3534883432582169129}
   _collider: {fileID: 2231878807555079795}

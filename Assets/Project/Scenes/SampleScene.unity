@@ -4714,7 +4714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.Zip.View.ZipBoardView
   _grid: {fileID: 2005469755}
   _wrongOrderLabel: {fileID: 1001025049}
-  _cellSize: {x: 0.85, y: 0.85}
+  _boardSize: {x: 5.1, y: 5.1}
   _offset: {x: 0, y: 0}
   _cellPrefab: {fileID: 7603084424562383632, guid: 166a17934bc612a4a863a9d853c1278d, type: 3}
 --- !u!156049354 &2005469755

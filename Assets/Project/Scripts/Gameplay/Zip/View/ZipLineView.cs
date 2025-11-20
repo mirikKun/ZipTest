@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Project.Scripts.Gameplay.Zip.View
 {
-    public class ZipLineView:MonoBehaviour
+    public class ZipLineView : MonoBehaviour
     {
         [SerializeField] private ZipLineSprite[] _lineSprites;
         [SerializeField] private SpriteRenderer _line;
@@ -22,12 +22,12 @@ namespace Project.Scripts.Gameplay.Zip.View
                 Vector2Int offset = lineCells[0].Position - lineCells[1].Position;
                 GetCurrentLineSprite(offset);
             }
-            else if(index == lineCells.Count - 1)
+            else if (index == lineCells.Count - 1)
             {
                 Vector2Int offset = lineCells[^1].Position - lineCells[^2].Position;
                 GetCurrentLineSprite(offset);
             }
-            else 
+            else
             {
                 GetStraightLineSprite(lineCells[index + 1].Position - lineCells[index - 1].Position);
                 GetAngleLineSprite(lineCells[index - 1].Position, lineCells[index].Position,
@@ -45,23 +45,21 @@ namespace Project.Scripts.Gameplay.Zip.View
             {
                 _line.sprite = GetSprite(LineSpriteType.StraightVertical);
             }
-
         }
 
         private void GetAngleLineSprite(Vector2Int previous, Vector2Int current, Vector2Int next)
         {
-            Vector2Int totalOffset=next-previous;
-            Vector2Int currentOffset=next-current;
-             if ((totalOffset.x == 1 && totalOffset.y == 1 && currentOffset.y == 1)
-                 || (totalOffset.x == -1 && totalOffset.y == -1 && currentOffset.x == -1))
+            Vector2Int totalOffset = next - previous;
+            Vector2Int currentOffset = next - current;
+            if ((totalOffset.x == 1 && totalOffset.y == 1 && currentOffset.y == 1)
+                || (totalOffset.x == -1 && totalOffset.y == -1 && currentOffset.x == -1))
             {
                 _line.sprite = GetSprite(LineSpriteType.AngleLeftUp);
             }
-            else if ((totalOffset.x == 1 && totalOffset.y == -1 && currentOffset.x == 1)||
+            else if ((totalOffset.x == 1 && totalOffset.y == -1 && currentOffset.x == 1) ||
                      (totalOffset.x == -1 && totalOffset.y == 1 && currentOffset.y == 1))
             {
                 _line.sprite = GetSprite(LineSpriteType.AngleRightUp);
-                
             }
             else if ((totalOffset.x == -1 && totalOffset.y == 1 && currentOffset.x == -1)
                      || (totalOffset.x == 1 && totalOffset.y == -1 && currentOffset.y == -1))
@@ -74,6 +72,7 @@ namespace Project.Scripts.Gameplay.Zip.View
                 _line.sprite = GetSprite(LineSpriteType.AngleRightDown);
             }
         }
+
         private void GetCurrentLineSprite(Vector2Int offset)
         {
             if (offset == Vector2Int.right)
@@ -100,13 +99,19 @@ namespace Project.Scripts.Gameplay.Zip.View
             {
                 if (cellBackground.SpriteType == spriteType) return cellBackground.Sprite;
             }
+
             return null;
         }
+
+        public void SetScale(float scale)
+        {
+            _line.transform.localScale = Vector3.one * scale;
+        }
     }
+
     [Serializable]
     public class ZipLineSprite
     {
-     
         public Sprite Sprite;
         public LineSpriteType SpriteType;
     }

@@ -10,7 +10,7 @@ namespace Project.Scripts.Gameplay.Zip.View
     {
         [SerializeField] private Grid _grid;
         [SerializeField] private GameObject _wrongOrderLabel;
-        [SerializeField] private Vector2 _cellSize;
+        [SerializeField] private Vector2 _boardSize;
         [SerializeField] private Vector2 _offset;
 
         [Header("Prefabs")] [SerializeField] private ZipCellView _cellPrefab;
@@ -26,7 +26,7 @@ namespace Project.Scripts.Gameplay.Zip.View
         private void Update()
         {
             if (!_active) return;
-            _timeUsed+=Time.deltaTime;
+            _timeUsed += Time.deltaTime;
         }
 
         public void CreateBoard(ZipBoardConfig config)
@@ -37,7 +37,9 @@ namespace Project.Scripts.Gameplay.Zip.View
             _board.BoardFinished += OnBoardFinished;
             _board.OrderBecameWrong += OnOrderBecameWrong;
             _board.OrderBecameCorrect += OnOrderBecameCorrect;
-            _grid.cellSize = _cellSize;
+
+            float cellSize = _boardSize.x / config.Size.x;
+            _grid.cellSize = Vector3.one*cellSize;
 
 
             _cells = new ZipCellView[config.Width, config.Height];
@@ -46,11 +48,11 @@ namespace Project.Scripts.Gameplay.Zip.View
             {
                 for (int y = 0; y < config.Height; y++)
                 {
-                    Vector3 centerOffset = (config.Size - Vector2Int.one) * _cellSize / 2;
+                    Vector3 centerOffset = _boardSize / 2;
                     Vector3 position = _grid.CellToWorld(new Vector3Int(x, y, 0)) +
                         new Vector3(_offset.x, _offset.y, 0) - centerOffset;
                     ZipCellView cell = Instantiate(_cellPrefab, position, Quaternion.identity, transform);
-                    cell.InitCell(_board.DefaultCells[x, y], _cellSize, config.Size);
+                    cell.InitCell(_board.DefaultCells[x, y], cellSize, config.Size);
                     _cells[x, y] = cell;
                     _cells[x, y].OnCellClicked += OnCellClicked;
                 }
@@ -59,7 +61,7 @@ namespace Project.Scripts.Gameplay.Zip.View
             Vector2Int start = config.StartPosition;
             _cells[start.x, start.y].UpdateCell(_board.ZipCurrentCells[start.x, start.y], _board.LineCells);
             _timeUsed = 0;
-            _active=true;
+            _active = true;
             _wrongOrderLabel.SetActive(false);
         }
 
@@ -103,9 +105,9 @@ namespace Project.Scripts.Gameplay.Zip.View
             _cells[cell.PreviousCell.Position.x, cell.PreviousCell.Position.y].UpdateCell(cell.PreviousCell, lineCells);
         }
 
-        private void OnCellClicked(ZipDefaultCell cell,bool canGoBack)
+        private void OnCellClicked(ZipDefaultCell cell, bool canGoBack)
         {
-            _board.TryMoveToPoint(cell.Position,canGoBack);
+            _board.TryMoveToPoint(cell.Position, canGoBack);
         }
     }
 }

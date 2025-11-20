@@ -10,6 +10,7 @@ namespace Project.Scripts.Gameplay.Zip.View
     public class ZipCellView : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _backGround;
+        [SerializeField] private float _spriteScaleMultiplier = 1.1f;
         [SerializeField] private ZipLineView _line;
         [SerializeField] private ZipCheckPointView _checkPoint;
         [SerializeField] private BoxCollider2D _collider;
@@ -17,10 +18,11 @@ namespace Project.Scripts.Gameplay.Zip.View
         [SerializeField] private ZipCellBackgroundSprite[] _cellBackgrounds;
 
         private ZipDefaultCell _cell;
+        private float _spritePixelPerUnit = 100;
 
-        public event Action<ZipDefaultCell,bool> OnCellClicked;
+        public event Action<ZipDefaultCell, bool> OnCellClicked;
 
-        public void InitCell(ZipDefaultCell cell, Vector2 size, Vector2Int boardSize)
+        public void InitCell(ZipDefaultCell cell, float size, Vector2Int boardSize)
         {
             _cell = cell;
             if (cell.Type == ZipCellType.Checkpoint)
@@ -33,8 +35,10 @@ namespace Project.Scripts.Gameplay.Zip.View
                 }
             }
 
-            //_backGround.size = size;
-            _collider.size = size;
+            float scale = (1 / (_backGround.sprite.rect.height / _spritePixelPerUnit)) * size;
+            _backGround.transform.localScale = Vector3.one * _spriteScaleMultiplier * scale;
+            _line.SetScale(scale);
+            _collider.size = Vector2.one*size;
             UpdateSprite(cell.Position, boardSize);
         }
 
@@ -50,14 +54,14 @@ namespace Project.Scripts.Gameplay.Zip.View
         private void OnMouseDown()
         {
             Debug.Log($"Click on{_cell.Position}");
-            OnCellClicked?.Invoke(_cell,true);
+            OnCellClicked?.Invoke(_cell, true);
         }
 
         private void OnMouseOver()
         {
             if (UnityEngine.Input.GetMouseButton(0))
             {
-                OnCellClicked?.Invoke(_cell,false);
+                OnCellClicked?.Invoke(_cell, false);
             }
         }
 
