@@ -19,9 +19,10 @@ namespace Project.Scripts.Gameplay.Zip.Board
         private bool _isFinished;
         private bool _isOrderCorrect;
         public ZipDefaultCell[,] DefaultCells => _defaultCells;
+        public List<ZipCurrentCell> LineCells => _lineCells;
         public ZipCurrentCell[,] ZipCurrentCells => _zipCurrentCells;
 
-        public event Action<ZipCurrentCell> OnCellChanged;
+        public event Action<ZipCurrentCell,List<ZipCurrentCell>> OnCellChanged;
         public event Action BoardFinished;
         public event Action OrderBecameWrong;
         public event Action OrderBecameCorrect;
@@ -122,9 +123,10 @@ namespace Project.Scripts.Gameplay.Zip.Board
             }
 
             _zipCurrentCells[_currentPosition.x, _currentPosition.y].SetStepIndex(-1);
-            OnCellChanged?.Invoke(_zipCurrentCells[_currentPosition.x, _currentPosition.y]);
             _lineCells.Remove(_zipCurrentCells[_currentPosition.x, _currentPosition.y]);
+            OnCellChanged?.Invoke(_zipCurrentCells[_currentPosition.x, _currentPosition.y],_lineCells);
             _currentPosition = nextPosition;
+            _zipCurrentCells[_currentPosition.x, _currentPosition.y].SetPreviousCell(null);
         }
 
         private void MoveBackwardsUntilPoint(Vector2Int point)
@@ -133,16 +135,22 @@ namespace Project.Scripts.Gameplay.Zip.Board
             {
                 MoveBackwards(_lineCells[^2].Position);
             }
+            OnCellChanged?.Invoke(_zipCurrentCells[_currentPosition.x, _currentPosition.y],_lineCells);
+
         }
 
         private void MoveForward(Vector2Int nextPosition)
         {
             _zipCurrentCells[nextPosition.x, nextPosition.y].SetStepIndex(
-                _zipCurrentCells[_currentPosition.x, _currentPosition.y].StepIndex + 1);
+                _zipCurrentCells[_currentPosition.x, _currentPosition.y].StepIndex + 1);  
+            
+            _zipCurrentCells[nextPosition.x, nextPosition.y].SetPreviousCell(
+                _zipCurrentCells[_currentPosition.x, _currentPosition.y]);
+            
             _currentPosition = nextPosition;
             _lineCells.Add(_zipCurrentCells[_currentPosition.x, _currentPosition.y]);
 
-            OnCellChanged?.Invoke(_zipCurrentCells[_currentPosition.x, _currentPosition.y]);
+            OnCellChanged?.Invoke(_zipCurrentCells[_currentPosition.x, _currentPosition.y],_lineCells);
 
             if (_defaultCells[_currentPosition.x, _currentPosition.y].Type == ZipCellType.Checkpoint)
             {

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Project.Scripts.Gameplay.Zip.Board;
 using Project.Scripts.Gameplay.Zip.Configs;
 using UnityEngine;
@@ -40,16 +41,21 @@ namespace Project.Scripts.Gameplay.Zip.View
                     Vector3 centerOffset = (_config.Size-Vector2Int.one) * _cellSize/2;
                     Vector3 position = _grid.CellToWorld(new Vector3Int(x, y, 0)) + new Vector3(_offset.x, _offset.y, 0)-centerOffset;
                     ZipCellView cell = Instantiate(_cellPrefab, position, Quaternion.identity, transform);
-                    cell.InitCell(_board.DefaultCells[x,y],_cellSize);
+                    cell.InitCell(_board.DefaultCells[x,y],_cellSize,_config.Size);
                     _cells[x, y] = cell;
                     _cells[x, y].OnCellClicked += OnCellClicked;
                 }
             }
+
+            Vector2Int start = _config.StartPosition;
+            _cells[start.x,start.y].UpdateCell(_board.ZipCurrentCells[start.x,start.y],_board.LineCells);
         }
 
-        private void OnCellChanged(ZipCurrentCell cell)
+        private void OnCellChanged(ZipCurrentCell cell,List<ZipCurrentCell> lineCells )
         {
-            _cells[cell.Position.x, cell.Position.y].UpdateCell(cell);
+            _cells[cell.Position.x, cell.Position.y].UpdateCell(cell,lineCells);
+            if (cell.PreviousCell == null) return;
+            _cells[cell.PreviousCell.Position.x, cell.PreviousCell.Position.y].UpdateCell(cell.PreviousCell,lineCells);
         }
 
         private void OnCellClicked(ZipDefaultCell cell)

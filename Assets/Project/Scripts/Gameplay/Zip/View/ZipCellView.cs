@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Project.Scripts.Gameplay.Zip.Board;
 using Project.Scripts.Gameplay.Zip.Enums;
 using UnityEngine;
@@ -12,11 +13,14 @@ namespace Project.Scripts.Gameplay.Zip.View
         [SerializeField] private ZipLineView _line;
         [SerializeField] private ZipCheckPointView _checkPoint;
         [SerializeField] private BoxCollider2D _collider;
+        
+        [SerializeField] private ZipCellBackgroundSprite[] _cellBackgrounds;
+        
         private ZipDefaultCell _cell;
 
         public event Action<ZipDefaultCell> OnCellClicked;
 
-        public void InitCell(ZipDefaultCell cell,Vector2 size)
+        public void InitCell(ZipDefaultCell cell, Vector2 size, Vector2Int boardSize)
         {
             _cell = cell;
             if (cell.Type == ZipCellType.Checkpoint)
@@ -31,11 +35,15 @@ namespace Project.Scripts.Gameplay.Zip.View
             }
             //_backGround.size = size;
             _collider.size = size;
+            UpdateSprite(cell.Position, boardSize);
         }
 
-        public void UpdateCell(ZipCurrentCell cell)
+        public void UpdateCell(ZipCurrentCell cell,List<ZipCurrentCell> lineCells)
         {
-            _line.gameObject.SetActive(cell.StepIndex > 0);
+            
+            _line.gameObject.SetActive(cell.StepIndex >= 0);
+            if(cell.StepIndex >= 0)
+            _line.UpdateLineSprite(lineCells,cell.StepIndex);
         }
 
         private void OnMouseDown()
@@ -43,6 +51,48 @@ namespace Project.Scripts.Gameplay.Zip.View
             Debug.Log($"Click on{_cell.Position}");
             OnCellClicked?.Invoke(_cell);
         }
+
+        private void UpdateSprite(Vector2Int position, Vector2Int size)
+        {
+            if (position.x == 0 && position.y == 0)
+            {
+                _backGround.sprite = GetSprite(CellBackgroundSpriteType.LeftDown);
+            }
+            else if (position.x == 0 && position.y == size.y - 1)
+            {
+                _backGround.sprite = GetSprite(CellBackgroundSpriteType.LeftUp);
+            }
+            else if (position.x == size.x - 1 && position.y == size.y - 1)
+            {
+                _backGround.sprite = GetSprite(CellBackgroundSpriteType.RightUp);
+            }
+            else if (position.x == size.x - 1 && position.y == 0)
+            {
+                _backGround.sprite = GetSprite(CellBackgroundSpriteType.RightDown);
+            }
+            else
+            {
+                _backGround.sprite = GetSprite(CellBackgroundSpriteType.Center);
+
+            }
+        }
+
+        private Sprite GetSprite(CellBackgroundSpriteType spriteType)
+        {
+            foreach (var cellBackground in _cellBackgrounds)
+            {
+                if (cellBackground._spriteType == spriteType) return cellBackground.Sprite;
+            }
+            return null;
+        }
+        
+    }
+
+    [Serializable]
+    public class ZipCellBackgroundSprite
+    {
+        public Sprite Sprite;
+        public CellBackgroundSpriteType _spriteType;
         
     }
 }

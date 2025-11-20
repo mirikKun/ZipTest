@@ -75,7 +75,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.64, y: 0.64, z: 0.64}
+  m_LocalScale: {x: 0.54, y: 0.54, z: 0.54}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5027713865616638980}
@@ -230,8 +230,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.2
-  m_fontSizeBase: 33.2
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -319,7 +319,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a890944b5c0a44d9ab2fe508c83b383c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.Zip.View.ZipLineView
-  _sprites: []
+  _lineSprites:
+  - Sprite: {fileID: 21300000, guid: ef082ac814b28fa429396212d07a2cb4, type: 3}
+    SpriteType: 0
+  - Sprite: {fileID: 21300000, guid: 9f0b80dc7a678074ea64b7b3dcacc1ff, type: 3}
+    SpriteType: 5
+  - Sprite: {fileID: 21300000, guid: b5030f44059aa4b4e8a38ebfd9159a52, type: 3}
+    SpriteType: 6
+  - Sprite: {fileID: 21300000, guid: 552aeffc14cf42442a2ce1cde02c6869, type: 3}
+    SpriteType: 7
+  - Sprite: {fileID: 21300000, guid: 4be9f46c8b5dda640b8e38c090169ef2, type: 3}
+    SpriteType: 8
+  - Sprite: {fileID: 21300000, guid: d880b673abd9aba429a730a1c851d2f5, type: 3}
+    SpriteType: 9
+  - Sprite: {fileID: 21300000, guid: d233110c4932dae42b9d1a53312177f2, type: 3}
+    SpriteType: 10
+  - Sprite: {fileID: 21300000, guid: 63a9acf2b906b1d4ea43305b59e06836, type: 3}
+    SpriteType: 3
+  - Sprite: {fileID: 21300000, guid: 13644e0e0801cd54b95a5d90e612f28e, type: 3}
+    SpriteType: 1
+  - Sprite: {fileID: 21300000, guid: 6dd84417a16ef1d4b9576223339619e5, type: 3}
+    SpriteType: 4
+  - Sprite: {fileID: 21300000, guid: e659bc64fdd252943a5d5143392082d4, type: 3}
+    SpriteType: 2
   _line: {fileID: 2377716048571558822}
 --- !u!1 &7873768040055501961
 GameObject:
@@ -348,7 +370,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.17, y: 0.17, z: 0.17}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3387327213851688165}
@@ -463,6 +485,17 @@ MonoBehaviour:
   _line: {fileID: 4827969820922919522}
   _checkPoint: {fileID: 3534883432582169129}
   _collider: {fileID: 2231878807555079795}
+  _cellBackgrounds:
+  - Sprite: {fileID: 21300000, guid: 6ad242fe03d418a49bf766a0aeb3b827, type: 3}
+    _spriteType: 0
+  - Sprite: {fileID: 21300000, guid: 67b1e11a591c27d418ff42d216d48f80, type: 3}
+    _spriteType: 3
+  - Sprite: {fileID: 21300000, guid: 5ba9a8292eb8b1346935e921ab945d1c, type: 3}
+    _spriteType: 4
+  - Sprite: {fileID: 21300000, guid: d7e30f28f927ed847b11ead0c83197a4, type: 3}
+    _spriteType: 2
+  - Sprite: {fileID: 21300000, guid: 9155dd3641e933e4bbc7701c34d1b01c, type: 3}
+    _spriteType: 1
 --- !u!61 &2231878807555079795
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -638,7 +671,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.165, y: 0.165, z: 0.165}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 383203655877892527}
