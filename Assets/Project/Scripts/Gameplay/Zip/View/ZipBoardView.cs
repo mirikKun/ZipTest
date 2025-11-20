@@ -6,56 +6,101 @@ using UnityEngine;
 
 namespace Project.Scripts.Gameplay.Zip.View
 {
-    public class ZipBoardView:MonoBehaviour
+    public class ZipBoardView : MonoBehaviour
     {
-        [SerializeField] private ZipBoardConfig _config;
         [SerializeField] private Grid _grid;
+        [SerializeField] private GameObject _wrongOrderLabel;
         [SerializeField] private Vector2 _cellSize;
         [SerializeField] private Vector2 _offset;
 
-        [Header("Prefabs")]
-
-        [SerializeField] private ZipCellView _cellPrefab;
+        [Header("Prefabs")] [SerializeField] private ZipCellView _cellPrefab;
 
 
         private ZipCellView[,] _cells;
         private ZipBoard _board;
-        private void Start()
+        private float _timeUsed;
+        private bool _active;
+        public event Action<float> BoardFinished;
+        public float TimeUsed => _timeUsed;
+
+        private void Update()
         {
-            CreateBoard();
+            if (!_active) return;
+            _timeUsed+=Time.deltaTime;
         }
 
-        private void CreateBoard()
+        public void CreateBoard(ZipBoardConfig config)
         {
-            _board = new ZipBoard(_config);
+            ClearBoard();
+            _board = new ZipBoard(config);
             _board.OnCellChanged += OnCellChanged;
+            _board.BoardFinished += OnBoardFinished;
+            _board.OrderBecameWrong += OnOrderBecameWrong;
+            _board.OrderBecameCorrect += OnOrderBecameCorrect;
             _grid.cellSize = _cellSize;
-            
 
-            _cells = new ZipCellView[_config.Width, _config.Height];
 
-            for (int x = 0; x < _config.Width; x++)
+            _cells = new ZipCellView[config.Width, config.Height];
+
+            for (int x = 0; x < config.Width; x++)
             {
-                for (int y = 0; y < _config.Height; y++)
+                for (int y = 0; y < config.Height; y++)
                 {
-                    Vector3 centerOffset = (_config.Size-Vector2Int.one) * _cellSize/2;
-                    Vector3 position = _grid.CellToWorld(new Vector3Int(x, y, 0)) + new Vector3(_offset.x, _offset.y, 0)-centerOffset;
+                    Vector3 centerOffset = (config.Size - Vector2Int.one) * _cellSize / 2;
+                    Vector3 position = _grid.CellToWorld(new Vector3Int(x, y, 0)) +
+                        new Vector3(_offset.x, _offset.y, 0) - centerOffset;
                     ZipCellView cell = Instantiate(_cellPrefab, position, Quaternion.identity, transform);
-                    cell.InitCell(_board.DefaultCells[x,y],_cellSize,_config.Size);
+                    cell.InitCell(_board.DefaultCells[x, y], _cellSize, config.Size);
                     _cells[x, y] = cell;
                     _cells[x, y].OnCellClicked += OnCellClicked;
                 }
             }
 
-            Vector2Int start = _config.StartPosition;
-            _cells[start.x,start.y].UpdateCell(_board.ZipCurrentCells[start.x,start.y],_board.LineCells);
+            Vector2Int start = config.StartPosition;
+            _cells[start.x, start.y].UpdateCell(_board.ZipCurrentCells[start.x, start.y], _board.LineCells);
+            _timeUsed = 0;
+            _active=true;
+            _wrongOrderLabel.SetActive(false);
         }
 
-        private void OnCellChanged(ZipCurrentCell cell,List<ZipCurrentCell> lineCells )
+        private void OnOrderBecameCorrect()
         {
-            _cells[cell.Position.x, cell.Position.y].UpdateCell(cell,lineCells);
+            _wrongOrderLabel.SetActive(false);
+        }
+
+        private void OnOrderBecameWrong()
+        {
+            _wrongOrderLabel.SetActive(true);
+        }
+
+        private void OnBoardFinished()
+        {
+            BoardFinished?.Invoke(_timeUsed);
+            _active = false;
+        }
+
+        private void ClearBoard()
+        {
+            if (_cells != null)
+            {
+                for (int x = 0; x < _cells.GetLength(0); x++)
+                {
+                    for (int y = 0; y < _cells.GetLength(1); y++)
+                    {
+                        if (_cells[x, y] != null)
+                            Destroy(_cells[x, y].gameObject);
+                    }
+                }
+
+                _cells = null;
+            }
+        }
+
+        private void OnCellChanged(ZipCurrentCell cell, List<ZipCurrentCell> lineCells)
+        {
+            _cells[cell.Position.x, cell.Position.y].UpdateCell(cell, lineCells);
             if (cell.PreviousCell == null) return;
-            _cells[cell.PreviousCell.Position.x, cell.PreviousCell.Position.y].UpdateCell(cell.PreviousCell,lineCells);
+            _cells[cell.PreviousCell.Position.x, cell.PreviousCell.Position.y].UpdateCell(cell.PreviousCell, lineCells);
         }
 
         private void OnCellClicked(ZipDefaultCell cell)

@@ -1,5 +1,4 @@
-﻿using Project.Scripts.Gameplay.Cameras.Provider;
-using Project.Scripts.Gameplay.Levels;
+﻿using Project.Scripts.Gameplay.Levels;
 using UnityEngine;
 using Zenject;
 
@@ -9,20 +8,17 @@ namespace Code.Infrastructure.Installers
     {
         [SerializeField] private Camera _mainCamera;
         [SerializeField] private Transform _startPoint;
-        private ICameraProvider _cameraProvider;
         private ILevelDataProvider _levelDataProvider;
 
         [Inject]
-        private void Construct(ICameraProvider cameraProvider, ILevelDataProvider levelDataProvider)
+        private void Construct( ILevelDataProvider levelDataProvider)
         {
             _levelDataProvider = levelDataProvider;
-            _cameraProvider = cameraProvider;
         }
 
         public void Initialize()
         {
             _levelDataProvider.SetStartPoint(_startPoint.position);
-            _cameraProvider.SetMainCamera(_mainCamera);
         }
     }
 }

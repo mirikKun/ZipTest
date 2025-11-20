@@ -2,7 +2,6 @@ using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.Loading;
 using Code.Infrastructure.States.GameStates;
 using Code.Infrastructure.States.StateMachine;
-using Project.Scripts.Gameplay.Cameras.Provider;
 using Project.Scripts.Gameplay.Common.Random;
 using Project.Scripts.Gameplay.Common.Time;
 using Project.Scripts.Gameplay.Input.Service;
@@ -22,7 +21,6 @@ namespace Code.Infrastructure.Installers
             BindAssetManagementServices();
             BindCommonServices();
             BindGameplayServices();
-            BindCameraProvider();
         }
         private void BindGameStates()
         {
@@ -35,10 +33,7 @@ namespace Code.Infrastructure.Installers
             Container.BindInterfacesAndSelfTo<GameloopLoopState>().AsSingle();
         }
 
-        private void BindCameraProvider()
-        {
-            Container.BindInterfacesAndSelfTo<CameraProvider>().AsSingle();
-        }
+
 
         private void BindGameplayServices()
         {
