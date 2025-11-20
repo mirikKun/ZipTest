@@ -1,9 +1,7 @@
-using System;
-using Project.Scripts.Gameplay.Zip.View;
 using TMPro;
 using UnityEngine;
 
-namespace Project.Scripts.Gameplay.Zip.Timer
+namespace Project.Scripts.Gameplay.Zip.View
 {
     public class TimerView:MonoBehaviour
     {

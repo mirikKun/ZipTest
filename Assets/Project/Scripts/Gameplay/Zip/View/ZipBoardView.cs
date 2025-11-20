@@ -103,9 +103,9 @@ namespace Project.Scripts.Gameplay.Zip.View
             _cells[cell.PreviousCell.Position.x, cell.PreviousCell.Position.y].UpdateCell(cell.PreviousCell, lineCells);
         }
 
-        private void OnCellClicked(ZipDefaultCell cell)
+        private void OnCellClicked(ZipDefaultCell cell,bool canGoBack)
         {
-            _board.TryMoveToPoint(cell.Position);
+            _board.TryMoveToPoint(cell.Position,canGoBack);
         }
     }
 }

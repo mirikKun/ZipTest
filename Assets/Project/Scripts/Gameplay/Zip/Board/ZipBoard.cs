@@ -22,7 +22,7 @@ namespace Project.Scripts.Gameplay.Zip.Board
         public List<ZipCurrentCell> LineCells => _lineCells;
         public ZipCurrentCell[,] ZipCurrentCells => _zipCurrentCells;
 
-        public event Action<ZipCurrentCell,List<ZipCurrentCell>> OnCellChanged;
+        public event Action<ZipCurrentCell, List<ZipCurrentCell>> OnCellChanged;
         public event Action BoardFinished;
         public event Action OrderBecameWrong;
         public event Action OrderBecameCorrect;
@@ -37,7 +37,6 @@ namespace Project.Scripts.Gameplay.Zip.Board
             InitializeZipCurrentCells(_size, _startPoint);
             _lineCells.Add(_zipCurrentCells[_startPoint.x, _startPoint.y]);
             AddCheckpoint(_defaultCells[_startPoint.x, _startPoint.y]);
-
         }
 
 
@@ -66,29 +65,29 @@ namespace Project.Scripts.Gameplay.Zip.Board
             _zipCurrentCells[startPoint.x, startPoint.y].SetStepIndex(0);
         }
 
-        public void TryMoveToPoint(Vector2Int point)
+        public void TryMoveToPoint(Vector2Int point, bool canGoBack = true)
         {
             if (!IsValidPosition(point)) return;
 
-            if (_zipCurrentCells[point.x, point.y].StepIndex >= 0)
+            if (_zipCurrentCells[point.x, point.y].StepIndex >= 0 && canGoBack)
             {
                 MoveBackwardsUntilPoint(point);
             }
-            if (point.x == _currentPosition.x)
+            else if (point.x == _currentPosition.x)
             {
                 int steps = Mathf.Abs(point.y - _currentPosition.y);
                 Direction direction = point.y > _currentPosition.y ? Direction.Up : Direction.Down;
-                Move(direction, steps);
+                Move(direction, steps, canGoBack);
             }
             else if (point.y == _currentPosition.y)
             {
                 int steps = Mathf.Abs(point.x - _currentPosition.x);
                 Direction direction = point.x > _currentPosition.x ? Direction.Right : Direction.Left;
-                Move(direction, steps);
+                Move(direction, steps, canGoBack);
             }
         }
 
-        public void Move(Direction direction, int steps = 1)
+        public void Move(Direction direction, int steps = 1, bool canGoBack = true)
         {
             if (steps <= 0) return;
             for (int i = 0; i < steps; i++)
@@ -99,7 +98,7 @@ namespace Project.Scripts.Gameplay.Zip.Board
                 {
                     MoveForward(nextPosition);
                 }
-                else if (CanMoveBackward(_currentPosition, nextPosition))
+                else if (canGoBack && CanMoveBackward(_currentPosition, nextPosition))
                 {
                     MoveBackwards(nextPosition);
                 }
@@ -124,33 +123,33 @@ namespace Project.Scripts.Gameplay.Zip.Board
 
             _zipCurrentCells[_currentPosition.x, _currentPosition.y].SetStepIndex(-1);
             _lineCells.Remove(_zipCurrentCells[_currentPosition.x, _currentPosition.y]);
-            OnCellChanged?.Invoke(_zipCurrentCells[_currentPosition.x, _currentPosition.y],_lineCells);
+            OnCellChanged?.Invoke(_zipCurrentCells[_currentPosition.x, _currentPosition.y], _lineCells);
             _currentPosition = nextPosition;
             _zipCurrentCells[_currentPosition.x, _currentPosition.y].SetPreviousCell(null);
         }
 
         private void MoveBackwardsUntilPoint(Vector2Int point)
         {
-            while (_currentPosition != point&&_lineCells.Count>1&&_currentPosition!=_startPoint)
+            while (_currentPosition != point && _lineCells.Count > 1 && _currentPosition != _startPoint)
             {
                 MoveBackwards(_lineCells[^2].Position);
             }
-            OnCellChanged?.Invoke(_zipCurrentCells[_currentPosition.x, _currentPosition.y],_lineCells);
 
+            OnCellChanged?.Invoke(_zipCurrentCells[_currentPosition.x, _currentPosition.y], _lineCells);
         }
 
         private void MoveForward(Vector2Int nextPosition)
         {
             _zipCurrentCells[nextPosition.x, nextPosition.y].SetStepIndex(
-                _zipCurrentCells[_currentPosition.x, _currentPosition.y].StepIndex + 1);  
-            
+                _zipCurrentCells[_currentPosition.x, _currentPosition.y].StepIndex + 1);
+
             _zipCurrentCells[nextPosition.x, nextPosition.y].SetPreviousCell(
                 _zipCurrentCells[_currentPosition.x, _currentPosition.y]);
-            
+
             _currentPosition = nextPosition;
             _lineCells.Add(_zipCurrentCells[_currentPosition.x, _currentPosition.y]);
 
-            OnCellChanged?.Invoke(_zipCurrentCells[_currentPosition.x, _currentPosition.y],_lineCells);
+            OnCellChanged?.Invoke(_zipCurrentCells[_currentPosition.x, _currentPosition.y], _lineCells);
 
             if (_defaultCells[_currentPosition.x, _currentPosition.y].Type == ZipCellType.Checkpoint)
             {
@@ -190,7 +189,7 @@ namespace Project.Scripts.Gameplay.Zip.Board
                     }
                 }
 
-                if (!_isOrderCorrect&&isOrderCorrect)
+                if (!_isOrderCorrect && isOrderCorrect)
                 {
                     OrderBecameCorrect?.Invoke();
                     _isOrderCorrect = true;

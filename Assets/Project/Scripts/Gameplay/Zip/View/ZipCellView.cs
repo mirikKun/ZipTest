@@ -13,12 +13,12 @@ namespace Project.Scripts.Gameplay.Zip.View
         [SerializeField] private ZipLineView _line;
         [SerializeField] private ZipCheckPointView _checkPoint;
         [SerializeField] private BoxCollider2D _collider;
-        
+
         [SerializeField] private ZipCellBackgroundSprite[] _cellBackgrounds;
-        
+
         private ZipDefaultCell _cell;
 
-        public event Action<ZipDefaultCell> OnCellClicked;
+        public event Action<ZipDefaultCell,bool> OnCellClicked;
 
         public void InitCell(ZipDefaultCell cell, Vector2 size, Vector2Int boardSize)
         {
@@ -26,30 +26,39 @@ namespace Project.Scripts.Gameplay.Zip.View
             if (cell.Type == ZipCellType.Checkpoint)
             {
                 _checkPoint.gameObject.SetActive(true);
-                _checkPoint.SetIndex(cell.Index+1);
+                _checkPoint.SetIndex(cell.Index + 1);
                 if (cell.Index == 0)
                 {
                     _line.gameObject.SetActive(true);
-
                 }
             }
+
             //_backGround.size = size;
             _collider.size = size;
             UpdateSprite(cell.Position, boardSize);
         }
 
-        public void UpdateCell(ZipCurrentCell cell,List<ZipCurrentCell> lineCells)
+        public void UpdateCell(ZipCurrentCell cell, List<ZipCurrentCell> lineCells)
         {
-            
             _line.gameObject.SetActive(cell.StepIndex >= 0);
-            if(cell.StepIndex >= 0)
-            _line.UpdateLineSprite(lineCells,cell.StepIndex);
+            if (cell.StepIndex >= 0)
+            {
+                _line.UpdateLineSprite(lineCells, cell.StepIndex);
+            }
         }
 
         private void OnMouseDown()
         {
             Debug.Log($"Click on{_cell.Position}");
-            OnCellClicked?.Invoke(_cell);
+            OnCellClicked?.Invoke(_cell,true);
+        }
+
+        private void OnMouseOver()
+        {
+            if (UnityEngine.Input.GetMouseButton(0))
+            {
+                OnCellClicked?.Invoke(_cell,false);
+            }
         }
 
         private void UpdateSprite(Vector2Int position, Vector2Int size)
@@ -73,7 +82,6 @@ namespace Project.Scripts.Gameplay.Zip.View
             else
             {
                 _backGround.sprite = GetSprite(CellBackgroundSpriteType.Center);
-
             }
         }
 
@@ -83,9 +91,9 @@ namespace Project.Scripts.Gameplay.Zip.View
             {
                 if (cellBackground._spriteType == spriteType) return cellBackground.Sprite;
             }
+
             return null;
         }
-        
     }
 
     [Serializable]
@@ -93,6 +101,5 @@ namespace Project.Scripts.Gameplay.Zip.View
     {
         public Sprite Sprite;
         public CellBackgroundSpriteType _spriteType;
-        
     }
 }

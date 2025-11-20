@@ -6,16 +6,19 @@ namespace Project.Scripts.Gameplay.Zip.Board
     {
         public int StepIndex { get; private set; }
         public ZipCurrentCell PreviousCell { get; private set; }
-        public Vector2Int Position { get;private set; }
+        public Vector2Int Position { get; private set; }
+
         public ZipCurrentCell(Vector2Int position)
         {
             Position = position;
             StepIndex = -1;
         }
+
         public void SetStepIndex(int stepIndex)
         {
             StepIndex = stepIndex;
         }
+
         public void SetPreviousCell(ZipCurrentCell previousCell)
         {
             PreviousCell = previousCell;
