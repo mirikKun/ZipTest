@@ -11,7 +11,7 @@ namespace Project.Scripts.Gameplay.Zip.LevelGeneration.Editor
     {
         private ZipLevelGenerator.GenerationSettings _settings = new ZipLevelGenerator.GenerationSettings();
         private int _seed = -1; // -1 means random seed
-        private string _outputPath = "Assets/Project/Configs/Zip/Generated";
+        private string _outputPath = "Assets/Project/Configs/Generated";
         private Vector2 _scrollPosition;
 
         [MenuItem("Tools/Zip/Level Generator")]

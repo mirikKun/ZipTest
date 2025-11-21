@@ -28,13 +28,13 @@ namespace Project.Scripts.Gameplay.Zip.Board
         public event Action OrderBecameWrong;
         public event Action OrderBecameCorrect;
 
-        public ZipBoard(ZipBoardConfig config)
+        public ZipBoard(ZipBoardData data)
         {
-            _startPoint = config.CheckpointPositions[0];
+            _startPoint = data.CheckpointPositions[0];
             _currentPosition = _startPoint;
             _isOrderCorrect = true;
-            _size = config.Size;
-            _defaultCells = config.GetCells();
+            _size = data.Size;
+            _defaultCells = data.GetCells();
             InitializeZipCurrentCells(_size, _startPoint);
             _lineCells.Add(_zipCurrentCells[_startPoint.x, _startPoint.y]);
             AddCheckpoint(_defaultCells[_startPoint.x, _startPoint.y]);

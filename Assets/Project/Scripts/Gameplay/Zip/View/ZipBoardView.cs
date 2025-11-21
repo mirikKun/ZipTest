@@ -29,37 +29,37 @@ namespace Project.Scripts.Gameplay.Zip.View
             _timeUsed += Time.deltaTime;
         }
 
-        public void CreateBoard(ZipBoardConfig config)
+        public void CreateBoard(ZipBoardData data)
         {
             ClearBoard();
-            _board = new ZipBoard(config);
+            _board = new ZipBoard(data);
             _board.OnCellChanged += OnCellChanged;
             _board.CheckpointReached += OnCheckpointReached;
             _board.BoardFinished += OnBoardFinished;
             _board.OrderBecameWrong += OnOrderBecameWrong;
             _board.OrderBecameCorrect += OnOrderBecameCorrect;
 
-            float cellSize = _boardSize.x / config.MaxSize;
+            float cellSize = _boardSize.x / data.MaxSize;
             _grid.cellSize = Vector3.one*cellSize;
 
 
-            _cells = new ZipCellView[config.Width, config.Height];
+            _cells = new ZipCellView[data.Width, data.Height];
 
-            for (int x = 0; x < config.Width; x++)
+            for (int x = 0; x < data.Width; x++)
             {
-                for (int y = 0; y < config.Height; y++)
+                for (int y = 0; y < data.Height; y++)
                 {
-                    Vector3 centerOffset = (((Vector2)config.Size * cellSize)) / 2-Vector2.one*cellSize/2;
+                    Vector3 centerOffset = (((Vector2)data.Size * cellSize)) / 2-Vector2.one*cellSize/2;
                     Vector3 position = _grid.CellToWorld(new Vector3Int(x, y, 0)) +
                         new Vector3(_offset.x, _offset.y, 0) - centerOffset;
                     ZipCellView cell = Instantiate(_cellPrefab, position, Quaternion.identity, transform);
-                    cell.InitCell(_board.DefaultCells[x, y], cellSize, config.Size);
+                    cell.InitCell(_board.DefaultCells[x, y], cellSize, data.Size);
                     _cells[x, y] = cell;
                     _cells[x, y].OnCellClicked += OnCellClicked;
                 }
             }
 
-            Vector2Int start = config.CheckpointPositions[0];
+            Vector2Int start = data.CheckpointPositions[0];
             _cells[start.x, start.y].UpdateCell(_board.ZipCurrentCells[start.x, start.y], _board.LineCells);
             _timeUsed = 0;
             _active = true;

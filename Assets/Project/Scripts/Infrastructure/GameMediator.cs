@@ -37,7 +37,7 @@ namespace Code.Infrastructure
             _mainMenuWindow.gameObject.SetActive(false);
             _winMenu.gameObject.SetActive(false);
             _hud.SetActive(true);
-            _board.CreateBoard(_zipBoardConfigsList.GetConfigByIndex(_currentBoardIndex));
+            _board.CreateBoard(_zipBoardConfigsList.GetLevelDataByIndex(_currentBoardIndex));
         }
 
         private void OnLevelFinished(float timeUsed)
