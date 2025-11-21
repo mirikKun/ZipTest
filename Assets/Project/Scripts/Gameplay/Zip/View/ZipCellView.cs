@@ -37,6 +37,7 @@ namespace Project.Scripts.Gameplay.Zip.View
 
             float scale = (1 / (_frame.sprite.rect.height / _spritePixelPerUnit)) * size;
             _frame.transform.localScale = Vector3.one * _spriteScaleMultiplier * scale;
+            _backGround.transform.localScale = Vector3.one * scale;
             _line.SetScale(scale);
             _collider.size = Vector2.one * size;
             UpdateSprite(cell.Position, boardSize);

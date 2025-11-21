@@ -39,7 +39,7 @@ namespace Project.Scripts.Gameplay.Zip.View
             _board.OrderBecameWrong += OnOrderBecameWrong;
             _board.OrderBecameCorrect += OnOrderBecameCorrect;
 
-            float cellSize = _boardSize.x / config.Size.x;
+            float cellSize = _boardSize.x / config.MaxSize;
             _grid.cellSize = Vector3.one*cellSize;
 
 
@@ -49,7 +49,7 @@ namespace Project.Scripts.Gameplay.Zip.View
             {
                 for (int y = 0; y < config.Height; y++)
                 {
-                    Vector3 centerOffset = _boardSize / 2-Vector2.one*cellSize/2;
+                    Vector3 centerOffset = (((Vector2)config.Size * cellSize)) / 2-Vector2.one*cellSize/2;
                     Vector3 position = _grid.CellToWorld(new Vector3Int(x, y, 0)) +
                         new Vector3(_offset.x, _offset.y, 0) - centerOffset;
                     ZipCellView cell = Instantiate(_cellPrefab, position, Quaternion.identity, transform);
@@ -59,7 +59,7 @@ namespace Project.Scripts.Gameplay.Zip.View
                 }
             }
 
-            Vector2Int start = config.StartPosition;
+            Vector2Int start = config.CheckpointPositions[0];
             _cells[start.x, start.y].UpdateCell(_board.ZipCurrentCells[start.x, start.y], _board.LineCells);
             _timeUsed = 0;
             _active = true;

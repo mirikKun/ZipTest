@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: ZipBoardConfigsList
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.Zip.Configs.ZipBoardConfigsList
   <Configs>k__BackingField:
-  - {fileID: 11400000, guid: 6279eb322f7e73d4e939306550dc7ccd, type: 2}
-  - {fileID: 11400000, guid: 9311ff2e782160149869ad3dc7a86e9c, type: 2}
-  - {fileID: 11400000, guid: 64f50e4105c6e9249aa8435950e4ef24, type: 2}
-  - {fileID: 11400000, guid: b7d6f3eca5c0e744c81f7ceb9624b4ce, type: 2}
-  - {fileID: 11400000, guid: d4f0b78da553461439d54d3c531ae902, type: 2}
-  - {fileID: 11400000, guid: 95a3ffb5d1b913d41b4c37424f94e0d4, type: 2}
-  - {fileID: 11400000, guid: d25a7818900041848952e798c02eea14, type: 2}
+  - {fileID: 11400000, guid: 58d0e94d4a0ce774081cbe0b8df21b04, type: 2}
+  - {fileID: 11400000, guid: be0333fc4815aaa4f88df60e4a428e09, type: 2}
+  - {fileID: 11400000, guid: a151fd20ad221744089e1cc7db0a11dc, type: 2}
+  - {fileID: 11400000, guid: 60dde44d4e831834ca8678d5be5317ee, type: 2}
+  - {fileID: 11400000, guid: 8ef465fa40e2ac44bbf09f376ad2481f, type: 2}
+  - {fileID: 11400000, guid: fcb320dbeff8da84f88dff6f91daa80b, type: 2}
+  - {fileID: 11400000, guid: 448e41dd0a18e914b9f110fad35e0085, type: 2}
+  - {fileID: 11400000, guid: 228f8800d4be1bc4592bf84c94983a31, type: 2}
+  - {fileID: 11400000, guid: ddb3932f752c8f943a0eebe0b565e435, type: 2}
+  - {fileID: 11400000, guid: 45ae28d166b15934cb7ca806464a1ec1, type: 2}

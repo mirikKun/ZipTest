@@ -10,15 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec65bb76eede4146ba2a9cb9b78a84a3, type: 3}
-  m_Name: ZipBoardConfig 7
+  m_Name: ZipLevel_7x7_16CP_0002
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.Zip.Configs.ZipBoardConfig
-  <Size>k__BackingField: {x: 6, y: 6}
+  <Size>k__BackingField: {x: 7, y: 7}
   <CheckpointPositions>k__BackingField:
+  - {x: 2, y: 6}
+  - {x: 5, y: 6}
+  - {x: 6, y: 2}
+  - {x: 6, y: 1}
+  - {x: 4, y: 0}
+  - {x: 3, y: 0}
   - {x: 2, y: 0}
-  - {x: 0, y: 4}
   - {x: 0, y: 1}
-  - {x: 4, y: 4}
-  - {x: 4, y: 1}
+  - {x: 0, y: 3}
   - {x: 2, y: 3}
-  - {x: 2, y: 1}
+  - {x: 5, y: 4}
+  - {x: 5, y: 5}
+  - {x: 2, y: 5}
+  - {x: 2, y: 4}
+  - {x: 1, y: 5}
+  - {x: 0, y: 6}
   <Walls>k__BackingField: []

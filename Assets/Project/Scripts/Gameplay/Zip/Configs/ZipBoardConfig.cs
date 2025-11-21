@@ -9,12 +9,12 @@ namespace Project.Scripts.Gameplay.Zip.Configs
     public class ZipBoardConfig : ScriptableObject
     {
         [field: SerializeField] public Vector2Int Size { get; private set; }
-        [field: SerializeField] public Vector2Int[] CheckpointIndexes { get; private set; }
+        [field: SerializeField] public Vector2Int[] CheckpointPositions { get; private set; }
         [field: SerializeField] public ZipCellWallsConfig[] Walls { get; private set; }
-        [field: SerializeField] public Vector2Int StartPosition { get; private set; }
 
         public int Width => Size.x;
         public int Height => Size.y;
+        public int MaxSize => Mathf.Max(Size.y,Size.x);
 
         public ZipDefaultCell[,] GetCells()
         {
@@ -28,10 +28,10 @@ namespace Project.Scripts.Gameplay.Zip.Configs
                 }
             }
 
-            for (var i = 0; i < CheckpointIndexes.Length; i++)
+            for (var i = 0; i < CheckpointPositions.Length; i++)
             {
-                Vector2Int checkpointIndex = CheckpointIndexes[i];
-                cells[checkpointIndex.x, checkpointIndex.y] = new ZipDefaultCell(ZipCellType.Checkpoint, checkpointIndex, i,haveRightWall:HaveRightWall(StartPosition),haveDownWall:HaveDownWall(StartPosition));
+                Vector2Int checkpointPosition = CheckpointPositions[i];
+                cells[checkpointPosition.x, checkpointPosition.y] = new ZipDefaultCell(ZipCellType.Checkpoint, checkpointPosition, i,haveRightWall:HaveRightWall(checkpointPosition),haveDownWall:HaveDownWall(checkpointPosition));
             }
 
 
@@ -59,8 +59,22 @@ namespace Project.Scripts.Gameplay.Zip.Configs
     [Serializable]
     public class ZipCellWallsConfig
     {
-        public Vector2Int Position { get; private set; }
-        public bool HaveRightWall { get; private set; }
-        public bool HaveDownWall { get; private set; }
+        [SerializeField] private Vector2Int _position;
+        [SerializeField] private bool _haveRightWall;
+        [SerializeField] private bool _haveDownWall;
+
+        public Vector2Int Position => _position;
+        public bool HaveRightWall => _haveRightWall;
+        public bool HaveDownWall => _haveDownWall;
+
+        // Конструктор по умолчанию для сериализации Unity
+        public ZipCellWallsConfig() { }
+
+        public ZipCellWallsConfig(Vector2Int position, bool haveRightWall, bool haveDownWall)
+        {
+            _position = position;
+            _haveRightWall = haveRightWall;
+            _haveDownWall = haveDownWall;
+        }
     }
 }

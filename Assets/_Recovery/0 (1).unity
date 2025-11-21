@@ -5073,7 +5073,7 @@ MonoBehaviour:
   _glareFrom: {fileID: 852713968}
   _glareTo: {fileID: 93288615}
   _board: {fileID: 2005469756}
-  _rotationDuration: 1.1
+  _rotationDuration: 1
   _rotationCurve:
     serializedVersion: 2
     m_Curve:
@@ -5087,8 +5087,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.17997803
     - serializedVersion: 3
-      time: 0.23388106
-      value: 0.8628645
+      time: 0.28000838
+      value: 0.94396496
       inSlope: 1.9357121
       outSlope: 1.9357121
       tangentMode: 0
@@ -5096,8 +5096,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.4668514
-      value: 0.7415353
+      time: 0.565057
+      value: 0.29164517
       inSlope: -1.8442303
       outSlope: -1.8442303
       tangentMode: 0
@@ -5116,7 +5116,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _rotation: {x: 12, y: 12, z: 0}
+  _rotation: {x: 14, y: 14, z: 0}
   _preGlareDelay: 0.2
   _preRotationDelay: 0.2
   _postRotationDelay: 0.2

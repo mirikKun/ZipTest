@@ -30,7 +30,7 @@ namespace Project.Scripts.Gameplay.Zip.Board
 
         public ZipBoard(ZipBoardConfig config)
         {
-            _startPoint = config.StartPosition;
+            _startPoint = config.CheckpointPositions[0];
             _currentPosition = _startPoint;
             _isOrderCorrect = true;
             _size = config.Size;

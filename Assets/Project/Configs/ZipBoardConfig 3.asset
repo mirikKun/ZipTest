@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ZipBoardConfig 3
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.Zip.Configs.ZipBoardConfig
   <Size>k__BackingField: {x: 6, y: 6}
-  <CheckpointIndexes>k__BackingField:
+  <CheckpointPositions>k__BackingField:
   - {x: 4, y: 3}
   - {x: 1, y: 3}
   - {x: 0, y: 3}
@@ -27,4 +27,3 @@ MonoBehaviour:
   - {x: 2, y: 3}
   - {x: 2, y: 2}
   <Walls>k__BackingField: []
-  <StartPosition>k__BackingField: {x: 4, y: 3}
