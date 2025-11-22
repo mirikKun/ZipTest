@@ -1,14 +1,16 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Project.Scripts.Gameplay.EffectAnimations;
+using Project.Scripts.Infrastructure.Progress;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Project.Scripts.Gameplay.Windows.WindowTypes
 {
-    public class WinMenu : MonoBehaviour
+    public class WinMenu : BaseWindow
     {
         [SerializeField] private Button _nextLevelButton;
         [SerializeField] private Button _restartButton;
@@ -18,6 +20,7 @@ namespace Project.Scripts.Gameplay.Windows.WindowTypes
         [SerializeField] private WinStar[] _stars;
         [SerializeField] private float _timeToMaxStars = 10f;
 
+        
         public void SetNextLevelButtonAction(UnityAction action)
         {
             _nextLevelButton.onClick.AddListener(action);

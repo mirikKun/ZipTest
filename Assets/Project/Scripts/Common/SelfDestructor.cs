@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Code.Common
+namespace Project.Scripts.Common
 {
     public class SelfDestructor : MonoBehaviour
     {

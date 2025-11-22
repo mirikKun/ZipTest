@@ -14,7 +14,7 @@ namespace Project.Scripts.Gameplay.Zip.View
         [SerializeField] private float _boardAppearAnimationDuration = 1.0f;
         [SerializeField] private float _cellAppearAnimationDuration = 0.2f;
 
-        public void PlayPlayBoardAppearAnimation(Vector3 scaleFrom, Vector3 scaleTo)
+        public void PlayBoardAppearAnimation(Vector3 scaleFrom, Vector3 scaleTo)
         {
             ZipCellView[,] cells = _zipBoardView.Cells;
             int rows = cells.GetLength(0);

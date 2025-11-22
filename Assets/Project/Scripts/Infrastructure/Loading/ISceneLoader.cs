@@ -1,6 +1,6 @@
 using System;
 
-namespace Code.Infrastructure.Loading
+namespace Project.Scripts.Infrastructure.Loading
 {
     public interface ISceneLoader
     {

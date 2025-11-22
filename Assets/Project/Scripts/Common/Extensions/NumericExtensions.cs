@@ -1,4 +1,4 @@
-﻿namespace Code.Common.Extensions
+﻿namespace Project.Scripts.Common.Extensions
 {
     public static class NumericExtensions
     {

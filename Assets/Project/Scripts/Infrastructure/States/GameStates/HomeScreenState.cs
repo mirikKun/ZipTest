@@ -1,6 +1,6 @@
-using Code.Infrastructure.States.StateInfrastructure;
+using Project.Scripts.Infrastructure.States.StateInfrastructure;
 
-namespace Code.Infrastructure.States.GameStates
+namespace Project.Scripts.Infrastructure.States.GameStates
 {
     public class HomeScreenState : IState, IUpdateable
     {

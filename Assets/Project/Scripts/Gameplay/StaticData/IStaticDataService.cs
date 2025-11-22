@@ -1,4 +1,5 @@
 ﻿using Project.Scripts.Gameplay.Windows;
+using Project.Scripts.Gameplay.Zip.Configs;
 using UnityEngine;
 
 namespace Project.Scripts.Gameplay.StaticData
@@ -7,5 +8,6 @@ namespace Project.Scripts.Gameplay.StaticData
     {
         void LoadAll();
         GameObject GetWindowPrefab(WindowId id);
+        ZipBoardConfigsList GetZipBoardConfigList();
     }
 }

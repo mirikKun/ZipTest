@@ -2,9 +2,9 @@
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace Code.Infrastructure.Loading
+namespace Project.Scripts.Infrastructure.Loading
 {
-    // Has execution order to start before every other script
+    // Has execution order to start before every other script(and before Zenject)
     public class SwitchToEntrySceneInEditor : MonoBehaviour
     {
 #if UNITY_EDITOR
