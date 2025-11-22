@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using Project.Scripts.Gameplay.Zip.Board;
 using Project.Scripts.Gameplay.Zip.Configs;
 using UnityEngine;
@@ -20,6 +21,7 @@ namespace Project.Scripts.Gameplay.Zip.View
         private ZipBoard _board;
         private float _timeUsed;
         private bool _active;
+        public ZipCellView[,] Cells => _cells;
         public event Action<float> BoardFinished;
         public float TimeUsed => _timeUsed;
 
@@ -62,8 +64,8 @@ namespace Project.Scripts.Gameplay.Zip.View
             Vector2Int start = data.CheckpointPositions[0];
             _cells[start.x, start.y].UpdateCell(_board.ZipCurrentCells[start.x, start.y], _board.LineCells);
             _timeUsed = 0;
-            _active = true;
             _wrongOrderLabel.SetActive(false);
+            _active = true;
         }
 
         public void ClearBoard()
@@ -75,7 +77,10 @@ namespace Project.Scripts.Gameplay.Zip.View
                     for (int y = 0; y < _cells.GetLength(1); y++)
                     {
                         if (_cells[x, y] != null)
-                            Destroy(_cells[x, y].gameObject);
+                        {
+                            _cells[x, y].Destroy();
+                            //Destroy(_cells[x, y].gameObject);
+                        }
                     }
                 }
 

@@ -52,6 +52,8 @@ namespace Code.Infrastructure
             _winMenu.gameObject.SetActive(false);
             _hud.SetActive(true);
             _board.CreateBoard(_zipBoardConfigsList.GetLevelDataByIndex(_gameProgressService.GetZipLevelIndex()));
+            _boardEffects.PlayPlayBoardAppearAnimation(Vector3.zero,Vector3.one);
+            
         }
 
         private void OnLevelFinished(float timeUsed)
@@ -63,6 +65,7 @@ namespace Code.Infrastructure
         private IEnumerator LevelFinishing(float timeUsed)
         {
             yield return _boardEffects.PlayFinishAnimation();
+            _boardEffects.PlayPlayBoardAppearAnimation(Vector3.one,Vector3.zero);
             _winMenu.gameObject.SetActive(true);
             _hud.SetActive(false);
             _winMenu.SetData(timeUsed);

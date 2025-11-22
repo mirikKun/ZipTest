@@ -15,7 +15,7 @@ namespace Project.Scripts.Gameplay.Windows.WindowTypes
         [SerializeField] private Button[] _mainMenuButtons;
         [SerializeField] private TextMeshProUGUI _timeUsed;
         [SerializeField] private AnimationsHolder _winAnimation;
-        [SerializeField] private Image[] _stars;
+        [SerializeField] private WinStar[] _stars;
         [SerializeField] private float _timeToMaxStars = 10f;
 
         public void SetNextLevelButtonAction(UnityAction action)
@@ -41,13 +41,37 @@ namespace Project.Scripts.Gameplay.Windows.WindowTypes
             int minutes = Mathf.FloorToInt(timeUsed / 60f);
             int seconds = Mathf.FloorToInt(timeUsed % 60f);
             _timeUsed.text = $"{minutes:00}:{seconds:00}";
-            for (int i = 0; i < _stars.Length; i++)
+
+            foreach (var star in _stars)
             {
-                _stars[i].enabled = _timeToMaxStars * (i+1) > timeUsed;
+                star.StarAnimation.SetStartState();
             }
 
+
             _winAnimation.SetAnimationsStartState();
-            _winAnimation.PlayAllAnimations().Forget();
+            PlayAnimations(timeUsed).Forget();
         }
+
+        private async UniTask PlayAnimations(float timeUsed)
+        {
+            await _winAnimation.PlayAllAnimations();
+            for (int i = 0; i < _stars.Length; i++)
+            {
+                if (_timeToMaxStars * (i + 1) > timeUsed)
+                {
+                    await UniTask.WaitForSeconds(_stars[i].Delay);
+                    _stars[i].StarParticles.Play();
+                    _stars[i].StarAnimation.PlayAnimation().Forget();
+                }
+            }
+        }
+    }
+
+    [Serializable]
+    public class WinStar
+    {
+        public BaseAnimation StarAnimation;
+        public ParticleSystem StarParticles;
+        public float Delay;
     }
 }

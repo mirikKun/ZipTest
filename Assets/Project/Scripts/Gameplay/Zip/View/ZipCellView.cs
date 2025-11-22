@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using Project.Scripts.Gameplay.Zip.Board;
 using Project.Scripts.Gameplay.Zip.Enums;
 using UnityEngine;
@@ -19,6 +20,7 @@ namespace Project.Scripts.Gameplay.Zip.View
 
         private ZipDefaultCell _cell;
         private float _spritePixelPerUnit = 100;
+        private Tween _tween;
 
         public event Action<ZipDefaultCell, bool> OnCellClicked;
 
@@ -58,15 +60,25 @@ namespace Project.Scripts.Gameplay.Zip.View
             _checkPoint.OnCheckPointReached();
         }
 
+        public void Destroy()
+        {
+            _tween.Kill();
+            Destroy(gameObject);
+        }
+
+        public void ApplyTween(Tween tween)
+        {
+            _tween = tween;
+        }
+
         private void OnMouseDown()
         {
-            //Debug.Log($"Click on{_cell.Position}");
             OnCellClicked?.Invoke(_cell, true);
         }
 
         private void OnMouseOver()
         {
-            if (UnityEngine.Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0))
             {
                 OnCellClicked?.Invoke(_cell, false);
             }
