@@ -60,7 +60,7 @@ namespace Project.Scripts.Gameplay.Zip.View
 
         private void OnMouseDown()
         {
-            Debug.Log($"Click on{_cell.Position}");
+            //Debug.Log($"Click on{_cell.Position}");
             OnCellClicked?.Invoke(_cell, true);
         }
 

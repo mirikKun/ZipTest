@@ -66,29 +66,7 @@ namespace Project.Scripts.Gameplay.Zip.View
             _wrongOrderLabel.SetActive(false);
         }
 
-        private void OnCheckpointReached(ZipCurrentCell cell)
-        {
-            _cells[cell.Position.x, cell.Position.y].OnCheckpointReached();
-        }
-
-        private void OnOrderBecameCorrect()
-        {
-            _wrongOrderLabel.SetActive(false);
-        }
-
-     
-        private void OnOrderBecameWrong()
-        {
-            _wrongOrderLabel.SetActive(true);
-        }
-
-        private void OnBoardFinished()
-        {
-            BoardFinished?.Invoke(_timeUsed);
-            _active = false;
-        }
-
-        private void ClearBoard()
+        public void ClearBoard()
         {
             if (_cells != null)
             {
@@ -103,6 +81,28 @@ namespace Project.Scripts.Gameplay.Zip.View
 
                 _cells = null;
             }
+        }
+
+        private void OnCheckpointReached(ZipCurrentCell cell)
+        {
+            _cells[cell.Position.x, cell.Position.y].OnCheckpointReached();
+        }
+
+        private void OnOrderBecameCorrect()
+        {
+            _wrongOrderLabel.SetActive(false);
+        }
+
+
+        private void OnOrderBecameWrong()
+        {
+            _wrongOrderLabel.SetActive(true);
+        }
+
+        private void OnBoardFinished()
+        {
+            BoardFinished?.Invoke(_timeUsed);
+            _active = false;
         }
 
         private void OnCellChanged(ZipCurrentCell cell, List<ZipCurrentCell> lineCells)

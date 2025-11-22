@@ -111,7 +111,7 @@ namespace Project.Scripts.Gameplay.Zip.Board
             {
                 _isFinished = true;
                 BoardFinished?.Invoke();
-                Debug.Log("Finished");
+                //Debug.Log("Finished");
             }
         }
 

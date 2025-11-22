@@ -4,9 +4,9 @@ using Code.Infrastructure.States.GameStates;
 using Code.Infrastructure.States.StateMachine;
 using Project.Scripts.Gameplay.Common.Random;
 using Project.Scripts.Gameplay.Common.Time;
-using Project.Scripts.Gameplay.Input.Service;
 using Project.Scripts.Gameplay.Levels;
 using Project.Scripts.Gameplay.StaticData;
+using Project.Scripts.Infrastructure.Progress;
 using Zenject;
 
 namespace Code.Infrastructure.Installers
@@ -15,7 +15,6 @@ namespace Code.Infrastructure.Installers
     {
         public override void InstallBindings()
         {
-            BindInputService();
             BindGameStates();
             BindInfrastructureServices();
             BindAssetManagementServices();
@@ -39,6 +38,7 @@ namespace Code.Infrastructure.Installers
         {
             Container.Bind<IStaticDataService>().To<StaticDataService>().AsSingle();
             Container.Bind<ILevelDataProvider>().To<LevelDataProvider>().AsSingle();
+            Container.Bind<IGameProgressService>().To<GameProgressService>().AsSingle();
         }
 
         private void BindInfrastructureServices()
@@ -58,14 +58,11 @@ namespace Code.Infrastructure.Installers
             Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle();
         }
 
-        private void BindInputService()
-        {
-            Container.Bind<IInputService>().To<StandaloneInputService>().AsSingle();
-        }
+
 
         public void Initialize()
         {
-            Container.Resolve<IGameStateMachine>().Enter<BootstrapState>();
+            //Container.Resolve<IGameStateMachine>().Enter<BootstrapState>();
         }
     }
 }

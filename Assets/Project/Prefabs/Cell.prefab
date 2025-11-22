@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5027713865616638980}
   - component: {fileID: 3534883432582169129}
+  - component: {fileID: 856761160391402287}
   m_Layer: 0
   m_Name: CheckPoint
   m_TagString: Untagged
@@ -48,8 +49,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.Zip.View.ZipCheckPointView
   _checkPoint: {fileID: 2667470929087653822}
   _index: {fileID: 4532303627477440242}
-  _animationDuration: 0.2
-  _animationCurve:
+  _reachAnimation:
+    _animations:
+    - _baseAnimation: {fileID: 856761160391402287}
+      _delayBefore: 0
+      _delayAfter: 0
+      _playMode: 0
+--- !u!114 &856761160391402287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836090694325262062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018ca70cd88d36b438710697fa9ece94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.EffectAnimations.Animations.ScaleAnimation
+  _duration: 0.42
+  _easeType: 6
+  _customCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -62,8 +82,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.17997803
     - serializedVersion: 3
-      time: 0.3657428
-      value: 0.4855201
+      time: 0.3990422
+      value: 0.4671278
       inSlope: 1.9357121
       outSlope: 1.9357121
       tangentMode: 0
@@ -71,14 +91,14 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.53356487
-      value: 0.98608917
-      inSlope: -1.0368052
-      outSlope: -1.0368052
+      time: 0.62903345
+      value: 0.9836352
+      inSlope: -0.32268587
+      outSlope: -0.32268587
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.1888934
+      outWeight: 0.08572003
     - serializedVersion: 3
       time: 0.7818599
       value: 0.3108034
@@ -100,7 +120,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _targetScale: 1.4
+  _useCustomCurve: 1
+  _target: {fileID: 5027713865616638980}
+  _targetScale: {x: 1.6, y: 1.6, z: 1}
+  _relativeScale: 0
+  _fromCurrentScale: 1
 --- !u!1 &3238748830301612952
 GameObject:
   m_ObjectHideFlags: 0

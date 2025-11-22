@@ -1,6 +1,7 @@
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using DG.Tweening;
+using Project.Scripts.Gameplay.EffectAnimations;
 
 namespace Project.Scripts.Gameplay.Zip.View
 {
@@ -9,9 +10,7 @@ namespace Project.Scripts.Gameplay.Zip.View
         [SerializeField] private SpriteRenderer _checkPoint;
         [SerializeField] private TextMeshProUGUI _index;
         [Header("Reach animation")]
-        [SerializeField] private float _animationDuration = 0.2f;
-        [SerializeField] private AnimationCurve _animationCurve;
-        [SerializeField] private float _targetScale = 1.2f;
+        [SerializeField] private AnimationsHolder _reachAnimation;
         
         public void SetIndex(int index)
         {
@@ -20,7 +19,7 @@ namespace Project.Scripts.Gameplay.Zip.View
 
         public void OnCheckPointReached()
         {
-            transform.DOScale(_targetScale, _animationDuration).SetEase(_animationCurve);
+            _reachAnimation.PlayAllAnimations().Forget();
         }
     }
 }

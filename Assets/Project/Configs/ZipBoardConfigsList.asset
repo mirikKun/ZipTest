@@ -20,4 +20,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d4f0b78da553461439d54d3c531ae902, type: 2}
   - {fileID: 11400000, guid: 95a3ffb5d1b913d41b4c37424f94e0d4, type: 2}
   - {fileID: 11400000, guid: d25a7818900041848952e798c02eea14, type: 2}
+  - {fileID: 11400000, guid: a989effbd5a81ad419230ad1341dded6, type: 2}
   <GeneratorSettings>k__BackingField: {fileID: 11400000, guid: 55bf3f660bf4f0d4aa0b86d017440f47, type: 2}

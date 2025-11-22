@@ -269,7 +269,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -3, y: 12}
-  m_SizeDelta: {x: 825.27576, y: 1240.1643}
+  m_SizeDelta: {x: 825.27576, y: 1042}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &43395745
 MonoBehaviour:
@@ -627,7 +627,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.00014687, y: -660.8}
+  m_AnchoredPosition: {x: 0.00014687, y: -693.6}
   m_SizeDelta: {x: 925.27576, y: 101.45825}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &225613537
@@ -923,7 +923,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &355904203
 RectTransform:
   m_ObjectHideFlags: 0
@@ -939,10 +939,10 @@ RectTransform:
   - {fileID: 1170297094}
   m_Father: {fileID: 15832111}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 412.72693, y: -361.65}
+  m_SizeDelta: {x: 585.45386, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &355904204
 MonoBehaviour:
@@ -1003,7 +1003,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 355904206}
   m_OnClick:
     m_PersistentCalls:
@@ -1883,10 +1883,10 @@ RectTransform:
   - {fileID: 1740451728}
   m_Father: {fileID: 938156414}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 16.385933}
-  m_SizeDelta: {x: 0.0041503906, y: -32.772217}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 825.2758, y: 866}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &721997237
 MonoBehaviour:
@@ -2247,6 +2247,7 @@ GameObject:
   - component: {fileID: 887613804}
   - component: {fileID: 887613806}
   - component: {fileID: 887613805}
+  - component: {fileID: 887613807}
   m_Layer: 5
   m_Name: Star
   m_TagString: Untagged
@@ -2311,6 +2312,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 887613803}
   m_CullTransparentMesh: 0
+--- !u!114 &887613807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887613803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018ca70cd88d36b438710697fa9ece94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.EffectAnimations.Animations.ScaleAnimation
+  _duration: 0.45
+  _easeType: 6
+  _customCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.7565517
+      value: 1.5639045
+      inSlope: 0.52897596
+      outSlope: 0.52897596
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9337125
+      value: 0.8998451
+      inSlope: -3.0800426
+      outSlope: -3.0800426
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _useCustomCurve: 1
+  _target: {fileID: 887613804}
+  _startScale: {x: 0, y: 0, z: 0}
+  _targetScale: {x: 1, y: 1, z: 1}
+  _relativeScale: 0
+  _fromCurrentScale: 0
 --- !u!1 &915996980
 GameObject:
   m_ObjectHideFlags: 0
@@ -2436,7 +2499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.15294118, g: 0.8862745, b: 0.61960787, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2490,7 +2553,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 938156413}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.07875}
+  m_LocalPosition: {x: 0, y: 0, z: 0.078750014}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2498,10 +2561,10 @@ RectTransform:
   - {fileID: 721997236}
   m_Father: {fileID: 1144047823}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 825.4498, y: 1134.26}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &938156415
 MonoBehaviour:
@@ -2858,6 +2921,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1027480126}
   - component: {fileID: 1027480127}
+  - component: {fileID: 1027480129}
+  - component: {fileID: 1027480128}
   m_Layer: 0
   m_Name: VictoryGreen
   m_TagString: Untagged
@@ -2873,7 +2938,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027480125}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.07875}
+  m_LocalPosition: {x: 0, y: 0, z: 0.078750014}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2881,10 +2946,10 @@ RectTransform:
   - {fileID: 43395744}
   m_Father: {fileID: 1144047823}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 825.4498, y: 1264.7651}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1027480127
 MonoBehaviour:
@@ -2899,10 +2964,162 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.Windows.WindowTypes.WinMenu
   _nextLevelButton: {fileID: 1363215103}
+  _restartButton: {fileID: 545204249}
   _mainMenuButtons:
   - {fileID: 815555515}
   - {fileID: 980684420}
   _timeUsed: {fileID: 216250177}
+  _winAnimation:
+    _animations:
+    - _baseAnimation: {fileID: 1027480129}
+      _delayBefore: 0
+      _delayAfter: 0
+      _playMode: 0
+    - _baseAnimation: {fileID: 1027480128}
+      _delayBefore: 0
+      _delayAfter: 0
+      _playMode: 0
+    - _baseAnimation: {fileID: 887613807}
+      _delayBefore: 0
+      _delayAfter: 0
+      _playMode: 1
+    - _baseAnimation: {fileID: 1336515257}
+      _delayBefore: 0.13
+      _delayAfter: 0
+      _playMode: 1
+    - _baseAnimation: {fileID: 1459378413}
+      _delayBefore: 0.25
+      _delayAfter: 0
+      _playMode: 1
+  _stars:
+  - {fileID: 887613805}
+  - {fileID: 1459378411}
+  - {fileID: 1336515255}
+  _timeToMaxStars: 10
+--- !u!114 &1027480128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027480125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018ca70cd88d36b438710697fa9ece94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.EffectAnimations.Animations.ScaleAnimation
+  _duration: 0.35
+  _easeType: 6
+  _customCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.44330144
+      outSlope: 0.44330144
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.17997803
+    - serializedVersion: 3
+      time: 0.15027815
+      value: 0.9120207
+      inSlope: 1.9357121
+      outSlope: 1.9357121
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.30230713
+      value: 0.9127733
+      inSlope: -2.619899
+      outSlope: -2.619899
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.1469409
+    - serializedVersion: 3
+      time: 1.0013428
+      value: -0.000045776367
+      inSlope: -0.38975006
+      outSlope: -0.38975006
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.28471386
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _useCustomCurve: 1
+  _target: {fileID: 1891151971}
+  _startScale: {x: 1, y: 1, z: 1}
+  _targetScale: {x: 1.1, y: 1.1, z: 1.1}
+  _relativeScale: 0
+  _fromCurrentScale: 1
+--- !u!114 &1027480129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027480125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018ca70cd88d36b438710697fa9ece94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.EffectAnimations.Animations.ScaleAnimation
+  _duration: 0.26
+  _easeType: 6
+  _customCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.8060512
+      value: 1.1017578
+      inSlope: 0.52897596
+      outSlope: 0.52897596
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9324918
+      value: 0.9737892
+      inSlope: -3.0800426
+      outSlope: -3.0800426
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _useCustomCurve: 1
+  _target: {fileID: 43395744}
+  _startScale: {x: 0.8, y: 0.8, z: 0.8}
+  _targetScale: {x: 1, y: 1, z: 1}
+  _relativeScale: 0
+  _fromCurrentScale: 0
 --- !u!1 &1144047819
 GameObject:
   m_ObjectHideFlags: 0
@@ -3106,7 +3323,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1159181858}
   m_OnClick:
     m_PersistentCalls:
@@ -3318,6 +3535,7 @@ GameObject:
   - component: {fileID: 1336515254}
   - component: {fileID: 1336515256}
   - component: {fileID: 1336515255}
+  - component: {fileID: 1336515257}
   m_Layer: 5
   m_Name: Star (2)
   m_TagString: Untagged
@@ -3382,6 +3600,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1336515253}
   m_CullTransparentMesh: 0
+--- !u!114 &1336515257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336515253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018ca70cd88d36b438710697fa9ece94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.EffectAnimations.Animations.ScaleAnimation
+  _duration: 0.45
+  _easeType: 6
+  _customCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.7565517
+      value: 1.5639045
+      inSlope: 0.52897596
+      outSlope: 0.52897596
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9337125
+      value: 0.8998451
+      inSlope: -3.0800426
+      outSlope: -3.0800426
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _useCustomCurve: 1
+  _target: {fileID: 1336515254}
+  _startScale: {x: 0, y: 0, z: 0}
+  _targetScale: {x: 1, y: 1, z: 1}
+  _relativeScale: 0
+  _fromCurrentScale: 0
 --- !u!1 &1341631916
 GameObject:
   m_ObjectHideFlags: 0
@@ -3993,6 +4273,7 @@ GameObject:
   - component: {fileID: 1459378410}
   - component: {fileID: 1459378412}
   - component: {fileID: 1459378411}
+  - component: {fileID: 1459378413}
   m_Layer: 5
   m_Name: Star (1)
   m_TagString: Untagged
@@ -4057,6 +4338,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1459378409}
   m_CullTransparentMesh: 0
+--- !u!114 &1459378413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459378409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018ca70cd88d36b438710697fa9ece94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.EffectAnimations.Animations.ScaleAnimation
+  _duration: 0.45
+  _easeType: 6
+  _customCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.7565517
+      value: 1.5639045
+      inSlope: 0.52897596
+      outSlope: 0.52897596
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9337125
+      value: 0.8998451
+      inSlope: -3.0800426
+      outSlope: -3.0800426
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _useCustomCurve: 1
+  _target: {fileID: 1459378410}
+  _startScale: {x: 0, y: 0, z: 0}
+  _targetScale: {x: 1, y: 1, z: 1}
+  _relativeScale: 0
+  _fromCurrentScale: 0
 --- !u!1 &1490132903
 GameObject:
   m_ObjectHideFlags: 0
@@ -4107,7 +4450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1501354571
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4347,7 +4690,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1657162791}
   m_OnClick:
     m_PersistentCalls:
@@ -4424,7 +4767,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.00014687, y: -560.2}
+  m_AnchoredPosition: {x: 0.00014687, y: -593}
   m_SizeDelta: {x: 925.27576, y: 101.45825}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1678549414
@@ -5004,6 +5347,9 @@ GameObject:
   - component: {fileID: 2005469755}
   - component: {fileID: 2005469754}
   - component: {fileID: 2005469757}
+  - component: {fileID: 2005469760}
+  - component: {fileID: 2005469759}
+  - component: {fileID: 2005469758}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -5068,13 +5414,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f084cb57cc146f796a5974b4403241d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.Zip.View.ZipBoardEffects
-  _glare: {fileID: 1490132904}
-  _glareDuration: 0.5
-  _glareFrom: {fileID: 852713968}
-  _glareTo: {fileID: 93288615}
-  _board: {fileID: 2005469756}
-  _rotationDuration: 1.1
-  _rotationCurve:
+  _finishAnimation:
+    _animations:
+    - _baseAnimation: {fileID: 2005469760}
+      _delayBefore: 0.2
+      _delayAfter: 0
+      _playMode: 0
+    - _baseAnimation: {fileID: 2005469759}
+      _delayBefore: 0
+      _delayAfter: 0
+      _playMode: 1
+    - _baseAnimation: {fileID: 2005469758}
+      _delayBefore: 0
+      _delayAfter: 0
+      _playMode: 0
+--- !u!114 &2005469758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005469753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11047352b6bcae040b49e6ea7e6d375e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.EffectAnimations.Animations.RotationAnimation
+  _duration: 0.8
+  _easeType: 6
+  _customCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -5087,8 +5455,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.17997803
     - serializedVersion: 3
-      time: 0.23388106
-      value: 0.8628645
+      time: 0.15027815
+      value: 0.9120207
       inSlope: 1.9357121
       outSlope: 1.9357121
       tangentMode: 0
@@ -5096,14 +5464,14 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.4668514
-      value: 0.7415353
-      inSlope: -1.8442303
-      outSlope: -1.8442303
+      time: 0.30230713
+      value: 0.9127733
+      inSlope: -2.619899
+      outSlope: -2.619899
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.15721107
+      outWeight: 0.1469409
     - serializedVersion: 3
       time: 1.0013428
       value: -0.000045776367
@@ -5116,10 +5484,183 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _rotation: {x: 12, y: 12, z: 0}
-  _preGlareDelay: 0.2
-  _preRotationDelay: 0.2
-  _postRotationDelay: 0.2
+  _useCustomCurve: 1
+  _target: {fileID: 2005469756}
+  _targetRotation: {x: 11, y: 11, z: 0}
+  _startRotation: {x: 0, y: 0, z: 0}
+  _relativeRotation: 0
+  _fromCurrentRotation: 1
+  _rotateMode: 0
+--- !u!114 &2005469759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005469753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018ca70cd88d36b438710697fa9ece94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.EffectAnimations.Animations.ScaleAnimation
+  _duration: 0.5
+  _easeType: 6
+  _customCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.44330144
+      outSlope: 0.44330144
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.17997803
+    - serializedVersion: 3
+      time: 0.15027815
+      value: 0.9120207
+      inSlope: 1.9357121
+      outSlope: 1.9357121
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.30230713
+      value: 0.9127733
+      inSlope: -2.619899
+      outSlope: -2.619899
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.1469409
+    - serializedVersion: 3
+      time: 1.0013428
+      value: -0.000045776367
+      inSlope: -0.38975006
+      outSlope: -0.38975006
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.28471386
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _useCustomCurve: 1
+  _target: {fileID: 2005469756}
+  _startScale: {x: 0, y: 0, z: 0}
+  _targetScale: {x: 1.1, y: 1.1, z: 1}
+  _relativeScale: 0
+  _fromCurrentScale: 1
+--- !u!114 &2005469760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005469753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ff40909a2bd8a4ca8739500634b605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.EffectAnimations.Animations.MoveAnimation
+  _duration: 0.8
+  _easeType: 6
+  _customCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _useCustomCurve: 1
+  _target: {fileID: 1490132904}
+  _targetPosition: {x: 0, y: 0, z: 0}
+  _startPosition: {x: 0, y: 0, z: 0}
+  _startPositionTransform: {fileID: 852713968}
+  _targetPositionTransform: {fileID: 93288615}
+  _useTransformTarget: 1
+--- !u!1 &2049503961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2049503963}
+  - component: {fileID: 2049503962}
+  m_Layer: 0
+  m_Name: SceneContext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2049503962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049503961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Zenject::Zenject.SceneContext
+  _scriptableObjectInstallers: []
+  _monoInstallers: []
+  _installerPrefabs: []
+  _autoRun: 1
+  OnPreInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPreResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  _parentNewObjectsUnderSceneContext: 0
+  _contractNames: []
+  _parentContractNames: []
+--- !u!4 &2049503963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049503961}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2055351311
 GameObject:
   m_ObjectHideFlags: 0
@@ -5205,3 +5746,4 @@ SceneRoots:
   - {fileID: 2005469756}
   - {fileID: 1144047823}
   - {fileID: 660578127}
+  - {fileID: 2049503963}
