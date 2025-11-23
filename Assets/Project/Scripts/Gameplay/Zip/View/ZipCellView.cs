@@ -24,7 +24,7 @@ namespace Project.Scripts.Gameplay.Zip.View
 
         public event Action<ZipDefaultCell, bool> OnCellClicked;
         public event Action<ZipDefaultCell, bool> OnCellOver;
-        public  ZipLineView Line=>_line;
+        public ZipLineView Line => _line;
 
         public void InitCell(ZipDefaultCell cell, float size, Vector2Int boardSize)
         {

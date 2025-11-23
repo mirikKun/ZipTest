@@ -8,7 +8,6 @@ using Project.Scripts.Infrastructure.Progress;
 using Project.Scripts.Infrastructure.States.Factory;
 using Project.Scripts.Infrastructure.States.GameStates;
 using Project.Scripts.Infrastructure.States.StateMachine;
-using Project.Scripts.Progress.Provider;
 using Zenject;
 
 namespace Project.Scripts.Infrastructure.Installers
@@ -23,31 +22,30 @@ namespace Project.Scripts.Infrastructure.Installers
             BindCommonServices();
             BindGameplayServices();
         }
+
         private void BindGameStateMachine()
         {
             Container.BindInterfacesAndSelfTo<StateFactory>().AsSingle();
             Container.Bind<IGameStateMachine>().To<GameStateMachine>().AsSingle();
-            
+
             //States
             Container.BindInterfacesAndSelfTo<BootstrapState>().AsSingle();
             Container.BindInterfacesAndSelfTo<InitializeProgressState>().AsSingle();
-            
+
             Container.BindInterfacesAndSelfTo<LoadingHomeScreenState>().AsSingle();
             Container.BindInterfacesAndSelfTo<HomeScreenState>().AsSingle();
-            
+
             Container.BindInterfacesAndSelfTo<LoadingZipGameSceneState>().AsSingle();
-            Container.BindInterfacesAndSelfTo<ZipGameState>().AsSingle();       
-            
+            Container.BindInterfacesAndSelfTo<ZipGameState>().AsSingle();
+
             Container.BindInterfacesAndSelfTo<LoadingZipEndlessGameSceneState>().AsSingle();
             Container.BindInterfacesAndSelfTo<ZipEndlessGameState>().AsSingle();
         }
 
 
-
         private void BindGameplayServices()
         {
             Container.Bind<IGameProgressService>().To<GameProgressService>().AsSingle();
-            Container.Bind<IProgressProvider>().To<ProgressProvider>().AsSingle();
             Container.Bind<IStaticDataService>().To<StaticDataService>().AsSingle();
         }
 
@@ -69,7 +67,6 @@ namespace Project.Scripts.Infrastructure.Installers
             Container.Bind<ITimeService>().To<UnityTimeService>().AsSingle();
             Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle();
         }
-
 
 
         public void Initialize()

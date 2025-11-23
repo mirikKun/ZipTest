@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Project.Scripts.Gameplay.Windows.WindowTypes
 {
-    public class LoseMenu:BaseWindow
+    public class LoseMenu : BaseWindow
     {
         [SerializeField] private Button _restartButton;
         [SerializeField] private Button[] _mainMenuButtons;
@@ -24,6 +24,7 @@ namespace Project.Scripts.Gameplay.Windows.WindowTypes
             SetMainMenuButtons(openHomeScreen);
             SetRestartButtonAction(openCurrentLevel);
         }
+
         public void SetMainMenuButtons(UnityAction action)
         {
             foreach (var button in _mainMenuButtons)
@@ -32,24 +33,23 @@ namespace Project.Scripts.Gameplay.Windows.WindowTypes
             }
         }
 
-  
+
         public void SetRestartButtonAction(UnityAction action)
         {
             _restartButton.onClick.AddListener(action);
         }
-        
-        public void SetData(float timeUsed,int levelPassed)
+
+        public void SetData(float timeUsed, int levelPassed)
         {
             int minutes = Mathf.FloorToInt(timeUsed / 60f);
             int seconds = Mathf.FloorToInt(timeUsed % 60f);
             _timeUsed.text = $"{minutes:00}:{seconds:00}";
 
-            _levelPassed.text=levelPassed.ToString();
+            _levelPassed.text = levelPassed.ToString();
 
 
             _progressAnimation.SetAnimationsStartState();
             _progressAnimation.PlayAllAnimations().Forget();
-
         }
     }
 }

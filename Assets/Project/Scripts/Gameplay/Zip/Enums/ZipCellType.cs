@@ -4,6 +4,5 @@ namespace Project.Scripts.Gameplay.Zip.Enums
     {
         Empty=0,
         Checkpoint=1,
-
     }
 }

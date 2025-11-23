@@ -8,7 +8,6 @@ namespace Project.Scripts.Gameplay.EffectAnimations.Animations
     public class ScaleAnimation : BaseAnimation
     {
         [SerializeField] private Transform _target;
-
         [SerializeField] private Vector3 _startScale = Vector3.zero;
         [SerializeField] private Vector3 _targetScale = Vector3.one;
         [SerializeField] private bool _relativeScale = false;

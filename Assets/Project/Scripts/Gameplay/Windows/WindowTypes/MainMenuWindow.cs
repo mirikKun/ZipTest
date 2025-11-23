@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Project.Scripts.Gameplay.Windows.WindowTypes
 {
-    public class MainMenuWindow:BaseWindow
+    public class MainMenuWindow : BaseWindow
     {
         [SerializeField] private Button _startZipGameButton;
         [SerializeField] private Button _startZipEndlessGameButton;
@@ -16,7 +16,7 @@ namespace Project.Scripts.Gameplay.Windows.WindowTypes
         private IWindowService _windowService;
 
         [Inject]
-        private void Construct(IGameStateMachine gameStateMachine,IWindowService windowService)
+        private void Construct(IGameStateMachine gameStateMachine, IWindowService windowService)
         {
             _gameStateMachine = gameStateMachine;
             _windowService = windowService;
@@ -31,15 +31,16 @@ namespace Project.Scripts.Gameplay.Windows.WindowTypes
         }
 
 
-    
         private void OpenSettingsMenu()
         {
             _windowService.Open(WindowId.Settings);
         }
+
         private void OpenZipGame()
         {
             _gameStateMachine.Enter<LoadingZipGameSceneState>();
         }
+
         private void OpenZipEndlessGame()
         {
             _gameStateMachine.Enter<LoadingZipEndlessGameSceneState>();

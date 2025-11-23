@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using DG.Tweening;
 using Project.Scripts.Gameplay.Zip.Board;
 using Project.Scripts.Gameplay.Zip.Configs;
 using UnityEngine;
@@ -26,9 +25,9 @@ namespace Project.Scripts.Gameplay.Zip.View
         public event Action<ZipCurrentCell> CellClicked;
 
 
-        public void CreateBoard(ZipBoardData data,bool autoClear=true)
+        public void CreateBoard(ZipBoardData data, bool autoClear = true)
         {
-            if(autoClear) ClearBoard();
+            if (autoClear) ClearBoard();
             _board = new ZipBoard(data);
             _board.OnCellChanged += OnCellChanged;
             _board.CheckpointReached += OnCheckpointReached;
@@ -37,7 +36,7 @@ namespace Project.Scripts.Gameplay.Zip.View
             _board.OrderBecameCorrect += OnOrderBecameCorrect;
 
             float cellSize = _boardSize.x / data.MaxSize;
-            _grid.cellSize = Vector3.one*cellSize;
+            _grid.cellSize = Vector3.one * cellSize;
 
 
             _cells = new ZipCellView[data.Width, data.Height];
@@ -46,7 +45,7 @@ namespace Project.Scripts.Gameplay.Zip.View
             {
                 for (int y = 0; y < data.Height; y++)
                 {
-                    Vector3 centerOffset = (((Vector2)data.Size * cellSize)) / 2-Vector2.one*cellSize/2;
+                    Vector3 centerOffset = (((Vector2)data.Size * cellSize)) / 2 - Vector2.one * cellSize / 2;
                     Vector3 position = _grid.CellToWorld(new Vector3Int(x, y, 0)) +
                         new Vector3(_offset.x, _offset.y, 0) - centerOffset;
                     ZipCellView cell = Instantiate(_cellPrefab, position, Quaternion.identity, transform);
@@ -119,10 +118,11 @@ namespace Project.Scripts.Gameplay.Zip.View
 
         private void OnCellClicked(ZipDefaultCell cell, bool canGoBack)
         {
-            if(!_active) return;
+            if (!_active) return;
             _board.TryMoveToPoint(cell.Position, canGoBack);
             CellClicked?.Invoke(_board.ZipCurrentCells[cell.Position.x, cell.Position.y]);
         }
+
         private void OnCellOver(ZipDefaultCell cell, bool canGoBack)
         {
             _board.TryMoveToPoint(cell.Position, canGoBack);

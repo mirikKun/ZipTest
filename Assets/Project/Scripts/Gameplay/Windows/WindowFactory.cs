@@ -20,7 +20,8 @@ namespace Project.Scripts.Gameplay.Windows
             _uiRoot = uiRoot;
 
         public BaseWindow CreateWindow(WindowId windowId) =>
-            _instantiator.InstantiatePrefabForComponent<BaseWindow>(PrefabFor(windowId), _uiRoot);        
+            _instantiator.InstantiatePrefabForComponent<BaseWindow>(PrefabFor(windowId), _uiRoot);
+
         public T CreateWindow<T>(WindowId windowId) where T : BaseWindow
         {
             return _instantiator.InstantiatePrefabForComponent<T>(PrefabFor(windowId), _uiRoot);

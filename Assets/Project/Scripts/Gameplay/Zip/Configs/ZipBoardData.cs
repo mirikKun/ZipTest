@@ -15,7 +15,8 @@ namespace Project.Scripts.Gameplay.Zip.Configs
         public int Height => Size.y;
         public int MaxSize => Mathf.Max(Size.y, Size.x);
 
-        public ZipBoardData(Vector2Int size, Vector2Int[] checkpointPositions, ZipCellWallsConfig[] walls, float orientedTimeToFinish)
+        public ZipBoardData(Vector2Int size, Vector2Int[] checkpointPositions, ZipCellWallsConfig[] walls,
+            float orientedTimeToFinish)
         {
             Size = size;
             CheckpointPositions = checkpointPositions ?? new Vector2Int[0];
@@ -31,8 +32,8 @@ namespace Project.Scripts.Gameplay.Zip.Configs
                 for (int y = 0; y < Size.y; y++)
                 {
                     Vector2Int position = new Vector2Int(x, y);
-                    cells[x, y] = new ZipDefaultCell(ZipCellType.Empty, position, 
-                        haveRightWall: HaveRightWall(position), 
+                    cells[x, y] = new ZipDefaultCell(ZipCellType.Empty, position,
+                        haveRightWall: HaveRightWall(position),
                         haveDownWall: HaveDownWall(position));
                 }
             }
@@ -55,6 +56,7 @@ namespace Project.Scripts.Gameplay.Zip.Configs
             {
                 if (wall.Position == position) return wall.HaveRightWall;
             }
+
             return false;
         }
 
@@ -64,8 +66,8 @@ namespace Project.Scripts.Gameplay.Zip.Configs
             {
                 if (wall.Position == position) return wall.HaveDownWall;
             }
+
             return false;
         }
     }
 }
-

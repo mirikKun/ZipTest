@@ -15,6 +15,7 @@ namespace Project.Scripts.Gameplay.Zip.Board
         private List<ZipCurrentCell> _lineCells = new List<ZipCurrentCell>();
         private Vector2Int _startPoint;
         private Vector2Int _currentPosition;
+        private int _checkpointsCount;
 
         private bool _isFinished;
         private bool _isOrderCorrect;
@@ -31,6 +32,7 @@ namespace Project.Scripts.Gameplay.Zip.Board
         public ZipBoard(ZipBoardData data)
         {
             _startPoint = data.CheckpointPositions[0];
+            _checkpointsCount = data.CheckpointPositions.Length;
             _currentPosition = _startPoint;
             _isOrderCorrect = true;
             _size = data.Size;
@@ -40,17 +42,6 @@ namespace Project.Scripts.Gameplay.Zip.Board
             AddCheckpoint(_defaultCells[_startPoint.x, _startPoint.y]);
         }
 
-
-        public ZipBoard(Vector2Int size, Vector2Int startPoint, ZipDefaultCell[,] cells)
-        {
-            _startPoint = startPoint;
-            _currentPosition = startPoint;
-            _isOrderCorrect = true;
-            _size = size;
-            _defaultCells = cells;
-            InitializeZipCurrentCells(_size, _startPoint);
-            _lineCells.Add(_zipCurrentCells[startPoint.x, startPoint.y]);
-        }
 
         private void InitializeZipCurrentCells(Vector2Int size, Vector2Int startPoint)
         {
@@ -68,7 +59,7 @@ namespace Project.Scripts.Gameplay.Zip.Board
 
         public void TryMoveToPoint(Vector2Int point, bool canGoBack = true)
         {
-            if (!IsValidPosition(point)||_isFinished) return;
+            if (!IsValidPosition(point) || _isFinished) return;
 
             if (_zipCurrentCells[point.x, point.y].StepIndex >= 0 && canGoBack)
             {
@@ -128,7 +119,6 @@ namespace Project.Scripts.Gameplay.Zip.Board
             _lineCells.Remove(_zipCurrentCells[_currentPosition.x, _currentPosition.y]);
             OnCellChanged?.Invoke(_zipCurrentCells[_currentPosition.x, _currentPosition.y], _lineCells);
             _currentPosition = nextPosition;
-            //_zipCurrentCells[_currentPosition.x, _currentPosition.y].SetPreviousCell(null);
         }
 
         private void MoveBackwardsUntilPoint(Vector2Int point)
@@ -162,7 +152,9 @@ namespace Project.Scripts.Gameplay.Zip.Board
 
         private void AddCheckpoint(ZipDefaultCell cell)
         {
-            if (_checkpoints.Count != 0 && _checkpoints[^1].Index != cell.Index - 1)
+            if (_checkpoints.Count != 0 && (_checkpoints[^1].Index != cell.Index - 1) ||
+                (cell.Index == _checkpointsCount - 1 &&
+                 _zipCurrentCells[_currentPosition.x, _currentPosition.y].StepIndex != CellsCount))
             {
                 if (_isOrderCorrect)
                 {
@@ -220,7 +212,7 @@ namespace Project.Scripts.Gameplay.Zip.Board
         private bool IsValidPosition(Vector2Int position)
         {
             return position.x >= 0 && position.x < _size.x &&
-                   position.y >= 0 && position.y < _size.y &&position!=_currentPosition;
+                   position.y >= 0 && position.y < _size.y && position != _currentPosition;
         }
 
         private bool HaveWall(Vector2Int currentPosition, Direction direction)
@@ -244,7 +236,7 @@ namespace Project.Scripts.Gameplay.Zip.Board
         {
             return _zipCurrentCells[previousPosition.x, previousPosition.y].StepIndex >= 0 &&
                    _zipCurrentCells[currentPosition.x, currentPosition.y].StepIndex ==
-                   _zipCurrentCells[previousPosition.x, previousPosition.y].StepIndex +1;
+                   _zipCurrentCells[previousPosition.x, previousPosition.y].StepIndex + 1;
         }
     }
 }

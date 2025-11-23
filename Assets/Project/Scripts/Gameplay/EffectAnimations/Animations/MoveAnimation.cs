@@ -16,15 +16,13 @@ namespace Project.Scripts.Gameplay.EffectAnimations.Animations
 
         public override async UniTask PlayAnimation()
         {
-
-
             Vector3 endPosition;
 
             if (_useTransformTarget)
             {
                 endPosition = _targetPositionTransform.position;
                 _target.position = _startPositionTransform.position;
-                
+
                 if (_targetPositionTransform is RectTransform targetPositionRectTransform)
                 {
                     endPosition = targetPositionRectTransform.anchoredPosition;
@@ -34,7 +32,6 @@ namespace Project.Scripts.Gameplay.EffectAnimations.Animations
             {
                 endPosition = _targetPosition;
                 _target.localPosition = _startPosition;
-
             }
 
             Tween tween;
@@ -48,7 +45,7 @@ namespace Project.Scripts.Gameplay.EffectAnimations.Animations
                     ? _target.DOLocalMove(endPosition, _duration)
                     : _target.DOMove(endPosition, _duration);
             }
-            
+
 
             if (_useCustomCurve && _customCurve != null && _customCurve.length > 0)
             {
@@ -67,13 +64,11 @@ namespace Project.Scripts.Gameplay.EffectAnimations.Animations
             if (_useTransformTarget)
             {
                 _target.position = _startPositionTransform.position;
-
             }
             else
             {
                 _target.position = _startPosition;
-            }        
+            }
         }
     }
 }
-

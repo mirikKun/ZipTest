@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Project.Scripts.Gameplay.EffectAnimations;
@@ -13,12 +11,14 @@ namespace Project.Scripts.Gameplay.Zip.View
         [SerializeField] private ZipBoardView _zipBoardView;
         [SerializeField] private AnimationsHolder _finishAnimation;
 
-        [Header("Board Appear Animation")]
-        [SerializeField] private float _boardAppearAnimationDuration = 1.0f;
+        [Header("Board Appear Animation")] [SerializeField]
+        private float _boardAppearAnimationDuration = 1.0f;
+
         [SerializeField] private float _cellAppearAnimationDuration = 0.2f;
 
 
         public float TotalBoardAppearAnimationDuration => _boardAppearAnimationDuration + _cellAppearAnimationDuration;
+
         private void Start()
         {
             _zipBoardView.CellClicked += OnCellClicked;
@@ -26,7 +26,7 @@ namespace Project.Scripts.Gameplay.Zip.View
 
         private void OnCellClicked(ZipCurrentCell cell)
         {
-            if(cell.StepIndex<0)
+            if (cell.StepIndex < 0)
                 return;
 
             ZipCellView[,] cells = _zipBoardView.Cells;
@@ -59,15 +59,16 @@ namespace Project.Scripts.Gameplay.Zip.View
             {
                 for (int y = 0; y < rows; y++)
                 {
-                      PlayCellAppearAnimation(cells[x, y], (x+y)/ (rows+columns-2f)* _boardAppearAnimationDuration,scaleTo).Forget();      
+                    PlayCellAppearAnimation(cells[x, y],
+                        (x + y) / (rows + columns - 2f) * _boardAppearAnimationDuration, scaleTo).Forget();
                 }
             }
         }
 
-        private async UniTask PlayCellAppearAnimation(ZipCellView cell, float delay,Vector3 scaleTo)
+        private async UniTask PlayCellAppearAnimation(ZipCellView cell, float delay, Vector3 scaleTo)
         {
             await UniTask.WaitForSeconds(delay);
-            if(cell)
+            if (cell)
             {
                 Tween tween = cell.transform.DOScale(scaleTo, _cellAppearAnimationDuration);
                 cell.ApplyTween(tween);

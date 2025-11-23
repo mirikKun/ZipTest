@@ -19,7 +19,7 @@ namespace Project.Scripts.Gameplay.EffectAnimations.Animations
             if (_graphic == null) return;
 
             float startAlpha = _useGraphicAlpha ? _graphic.color.a : _startAlpha;
-            
+
             Color currentColor = _graphic.color;
             currentColor.a = startAlpha;
             _graphic.color = currentColor;
@@ -43,7 +43,7 @@ namespace Project.Scripts.Gameplay.EffectAnimations.Animations
             if (_graphic == null) return;
 
             float startAlpha = _useGraphicAlpha ? _graphic.color.a : _startAlpha;
-            
+
             Color currentColor = _graphic.color;
             currentColor.a = startAlpha;
             _graphic.color = currentColor;

@@ -5,13 +5,14 @@ using Project.Scripts.Gameplay.EffectAnimations;
 
 namespace Project.Scripts.Gameplay.Zip.View
 {
-    public class ZipCheckPointView:MonoBehaviour
+    public class ZipCheckPointView : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _checkPoint;
         [SerializeField] private TextMeshProUGUI _index;
-        [Header("Reach animation")]
-        [SerializeField] private AnimationsHolder _reachAnimation;
-        
+
+        [Header("Reach animation")] [SerializeField]
+        private AnimationsHolder _reachAnimation;
+
         public void SetIndex(int index)
         {
             _index.text = index.ToString();

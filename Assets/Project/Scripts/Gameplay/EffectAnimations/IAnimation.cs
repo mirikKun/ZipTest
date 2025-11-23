@@ -5,10 +5,8 @@ namespace Project.Scripts.Gameplay.EffectAnimations
 {
     public interface IAnimation
     {
-
         UniTask PlayAnimation();
         float GetAnimationDuration();
         void SetStartState();
     }
 }
-

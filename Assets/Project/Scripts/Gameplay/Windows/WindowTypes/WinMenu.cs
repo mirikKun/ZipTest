@@ -1,12 +1,10 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Project.Scripts.Gameplay.EffectAnimations;
-using Project.Scripts.Infrastructure.Progress;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using Zenject;
 
 namespace Project.Scripts.Gameplay.Windows.WindowTypes
 {
@@ -48,7 +46,7 @@ namespace Project.Scripts.Gameplay.Windows.WindowTypes
             _restartButton.onClick.AddListener(action);
         }
 
-        public void SetData(float timeUsed,float timeToMaxStars)
+        public void SetData(float timeUsed, float timeToMaxStars)
         {
             int minutes = Mathf.FloorToInt(timeUsed / 60f);
             int seconds = Mathf.FloorToInt(timeUsed % 60f);
@@ -61,15 +59,15 @@ namespace Project.Scripts.Gameplay.Windows.WindowTypes
 
 
             _winAnimation.SetAnimationsStartState();
-            PlayAnimations(timeUsed,timeToMaxStars).Forget();
+            PlayAnimations(timeUsed, timeToMaxStars).Forget();
         }
 
-        private async UniTask PlayAnimations(float timeUsed,float timeToMaxStars)
+        private async UniTask PlayAnimations(float timeUsed, float timeToMaxStars)
         {
             await _winAnimation.PlayAllAnimations();
             for (int i = 0; i < _stars.Length; i++)
             {
-                if (timeToMaxStars * (i + 1)/_stars.Length > timeUsed)
+                if (timeToMaxStars * (i + 1) / _stars.Length > timeUsed)
                 {
                     await UniTask.WaitForSeconds(_stars[i].Delay);
                     _stars[i].StarParticles.Play();

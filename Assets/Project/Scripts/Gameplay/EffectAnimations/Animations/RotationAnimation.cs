@@ -8,7 +8,6 @@ namespace Project.Scripts.Gameplay.EffectAnimations.Animations
     public class RotationAnimation : BaseAnimation
     {
         [SerializeField] private Transform _target;
-
         [SerializeField] private Vector3 _targetRotation = Vector3.zero;
         [SerializeField] private Vector3 _startRotation = Vector3.zero;
         [SerializeField] private bool _relativeRotation = false;
@@ -17,7 +16,6 @@ namespace Project.Scripts.Gameplay.EffectAnimations.Animations
 
         public override async UniTask PlayAnimation()
         {
-
             Vector3 startRotation = _fromCurrentRotation ? _target.eulerAngles : _startRotation;
             Vector3 endRotation = _relativeRotation ? startRotation + _targetRotation : _targetRotation;
 
@@ -42,4 +40,3 @@ namespace Project.Scripts.Gameplay.EffectAnimations.Animations
         }
     }
 }
-

@@ -68,10 +68,8 @@ namespace Project.Scripts.Gameplay.Zip.Controller
 
             if (_remainingTime <= 0)
             {
-                
                 OnTimeRunOut();
                 _timer.UpdateTimer(0);
-
             }
         }
 
@@ -93,7 +91,8 @@ namespace Project.Scripts.Gameplay.Zip.Controller
         private async void OnLevelFinished()
         {
             _levelsPassed++;
-            float additionalTime = _currentZipBoardData.OrientedTimeToFinish * (Mathf.Pow(_durationMultiplicatorOverboard, _levelsPassed));
+            float additionalTime = _currentZipBoardData.OrientedTimeToFinish *
+                                   (Mathf.Pow(_durationMultiplicatorOverboard, _levelsPassed));
             _remainingTime += additionalTime;
             _timer.PlayNewTimeEffect(additionalTime);
             await _boardEffects.PlayFinishAnimation();
@@ -129,8 +128,8 @@ namespace Project.Scripts.Gameplay.Zip.Controller
             var winMenu = _windowService.Open<LoseMenu>(WindowId.LosePanel);
             _boardEffects.PlayBoardAppearAnimation(Vector3.one, Vector3.zero);
 
-            winMenu.SetData(_timeUsed,_levelsPassed);
-            winMenu.Init(OpenHomeScreen,OpenNextLevel);
+            winMenu.SetData(_timeUsed, _levelsPassed);
+            winMenu.Init(OpenHomeScreen, OpenNextLevel);
         }
 
         private void OpenHomeScreen()

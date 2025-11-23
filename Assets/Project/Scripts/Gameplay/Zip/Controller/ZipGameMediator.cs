@@ -51,6 +51,7 @@ namespace Project.Scripts.Gameplay.Zip.Controller
             _boardConfigsList = _staticDataService.GetZipBoardConfigList();
             OpenCurrentLevel();
         }
+
         private void Update()
         {
             if (!_active) return;
@@ -94,11 +95,9 @@ namespace Project.Scripts.Gameplay.Zip.Controller
             _boardEffects.PlayBoardAppearAnimation(Vector3.one, Vector3.zero);
             _timer.gameObject.SetActive(false);
             var winMenu = _windowService.Open<WinMenu>(WindowId.WinPanel);
-            winMenu.SetData(_timeUsed,_currentBoardData.OrientedTimeToFinish*3);
+            winMenu.SetData(_timeUsed, _currentBoardData.OrientedTimeToFinish * 3);
 
-            winMenu.Init(OpenHomeScreen,OpenNextLevel,OpenCurrentLevel);
+            winMenu.Init(OpenHomeScreen, OpenNextLevel, OpenCurrentLevel);
         }
-
-  
     }
 }

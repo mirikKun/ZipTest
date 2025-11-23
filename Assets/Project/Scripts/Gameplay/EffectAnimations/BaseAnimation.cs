@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Project.Scripts.Gameplay.EffectAnimations
 {
-    public abstract class BaseAnimation :MonoBehaviour, IAnimation
+    public abstract class BaseAnimation : MonoBehaviour, IAnimation
     {
         [SerializeField] protected float _duration = 1f;
         [SerializeField] protected Ease _easeType = Ease.OutQuad;
@@ -12,7 +12,7 @@ namespace Project.Scripts.Gameplay.EffectAnimations
         [SerializeField] protected bool _useCustomCurve = false;
 
         public abstract UniTask PlayAnimation();
-        
+
         public virtual float GetAnimationDuration()
         {
             return _duration;
@@ -21,4 +21,3 @@ namespace Project.Scripts.Gameplay.EffectAnimations
         public abstract void SetStartState();
     }
 }
-
