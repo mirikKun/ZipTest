@@ -22,4 +22,5 @@ MonoBehaviour:
     MinCheckpointDensity: 0.2
     MaxCheckpointDensity: 0.5
     RandomCheckpointPlacement: 1
+    TimePerCell: 0.6
   _seed: -1

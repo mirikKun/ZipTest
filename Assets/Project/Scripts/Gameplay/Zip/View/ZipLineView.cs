@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using Project.Scripts.Gameplay.EffectAnimations;
 using Project.Scripts.Gameplay.Zip.Board;
 using Project.Scripts.Gameplay.Zip.Enums;
 using UnityEngine;
@@ -11,6 +13,7 @@ namespace Project.Scripts.Gameplay.Zip.View
         [SerializeField] private SpriteRenderer _line;
         [SerializeField] private SpriteMask _spriteMask;
         [SerializeField] private ZipLineSprite[] _lineSprites;
+        [SerializeField] private AnimationsHolder _onClickAnimation;
 
         public void UpdateLineSprite(List<ZipCurrentCell> lineCells, int index)
         {
@@ -34,6 +37,11 @@ namespace Project.Scripts.Gameplay.Zip.View
                 GetAngleLineSprite(lineCells[index - 1].Position, lineCells[index].Position,
                     lineCells[index + 1].Position);
             }
+        }
+
+        public void PlayOnClickAnimation()
+        {
+            _onClickAnimation.PlayAllAnimations().Forget();
         }
 
         private void GetStraightLineSprite(Vector2Int offset)

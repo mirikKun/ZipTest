@@ -16,24 +16,19 @@ namespace Project.Scripts.Gameplay.Zip.View
 
         [Header("Prefabs")] [SerializeField] private ZipCellView _cellPrefab;
 
+        private Vector2Int _current;
 
         private ZipCellView[,] _cells;
         private ZipBoard _board;
-        private float _timeUsed;
         private bool _active;
         public ZipCellView[,] Cells => _cells;
-        public event Action<float> BoardFinished;
-        public float TimeUsed => _timeUsed;
+        public event Action BoardFinished;
+        public event Action<ZipCurrentCell> CellClicked;
 
-        private void Update()
-        {
-            if (!_active) return;
-            _timeUsed += Time.deltaTime;
-        }
 
-        public void CreateBoard(ZipBoardData data)
+        public void CreateBoard(ZipBoardData data,bool autoClear=true)
         {
-            ClearBoard();
+            if(autoClear) ClearBoard();
             _board = new ZipBoard(data);
             _board.OnCellChanged += OnCellChanged;
             _board.CheckpointReached += OnCheckpointReached;
@@ -58,12 +53,12 @@ namespace Project.Scripts.Gameplay.Zip.View
                     cell.InitCell(_board.DefaultCells[x, y], cellSize, data.Size);
                     _cells[x, y] = cell;
                     _cells[x, y].OnCellClicked += OnCellClicked;
+                    _cells[x, y].OnCellOver += OnCellOver;
                 }
             }
 
             Vector2Int start = data.CheckpointPositions[0];
             _cells[start.x, start.y].UpdateCell(_board.ZipCurrentCells[start.x, start.y], _board.LineCells);
-            _timeUsed = 0;
             _wrongOrderLabel.SetActive(false);
             _active = true;
         }
@@ -88,6 +83,11 @@ namespace Project.Scripts.Gameplay.Zip.View
             }
         }
 
+        public void SetActive(bool active)
+        {
+            _active = active;
+        }
+
         private void OnCheckpointReached(ZipCurrentCell cell)
         {
             _cells[cell.Position.x, cell.Position.y].OnCheckpointReached();
@@ -106,8 +106,8 @@ namespace Project.Scripts.Gameplay.Zip.View
 
         private void OnBoardFinished()
         {
-            BoardFinished?.Invoke(_timeUsed);
             _active = false;
+            BoardFinished?.Invoke();
         }
 
         private void OnCellChanged(ZipCurrentCell cell, List<ZipCurrentCell> lineCells)
@@ -118,6 +118,12 @@ namespace Project.Scripts.Gameplay.Zip.View
         }
 
         private void OnCellClicked(ZipDefaultCell cell, bool canGoBack)
+        {
+            if(!_active) return;
+            _board.TryMoveToPoint(cell.Position, canGoBack);
+            CellClicked?.Invoke(_board.ZipCurrentCells[cell.Position.x, cell.Position.y]);
+        }
+        private void OnCellOver(ZipDefaultCell cell, bool canGoBack)
         {
             _board.TryMoveToPoint(cell.Position, canGoBack);
         }

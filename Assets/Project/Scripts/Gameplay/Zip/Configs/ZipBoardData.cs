@@ -9,16 +9,18 @@ namespace Project.Scripts.Gameplay.Zip.Configs
         public Vector2Int Size { get; }
         public Vector2Int[] CheckpointPositions { get; }
         public ZipCellWallsConfig[] Walls { get; }
+        public float OrientedTimeToFinish { get; }
 
         public int Width => Size.x;
         public int Height => Size.y;
         public int MaxSize => Mathf.Max(Size.y, Size.x);
 
-        public ZipBoardData(Vector2Int size, Vector2Int[] checkpointPositions, ZipCellWallsConfig[] walls = null)
+        public ZipBoardData(Vector2Int size, Vector2Int[] checkpointPositions, ZipCellWallsConfig[] walls, float orientedTimeToFinish)
         {
             Size = size;
             CheckpointPositions = checkpointPositions ?? new Vector2Int[0];
             Walls = walls ?? new ZipCellWallsConfig[0];
+            OrientedTimeToFinish = orientedTimeToFinish;
         }
 
         public ZipDefaultCell[,] GetCells()

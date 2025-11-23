@@ -85,6 +85,12 @@ namespace Project.Scripts.Gameplay.Zip.LevelGeneration.Editor
             
             EditorGUILayout.Space();
             
+            // Time settings
+            EditorGUILayout.LabelField("Time Settings", EditorStyles.boldLabel);
+            _settings.TimePerCell = EditorGUILayout.Slider("Time Per Cell", _settings.TimePerCell, 0.1f, 2.0f);
+  
+            EditorGUILayout.Space();
+            
             // Generation settings
             EditorGUILayout.LabelField("Generation Settings", EditorStyles.boldLabel);
             _seed = EditorGUILayout.IntField("Seed (-1 for random)", _seed);

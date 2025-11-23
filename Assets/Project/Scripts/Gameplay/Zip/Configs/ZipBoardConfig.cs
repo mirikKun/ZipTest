@@ -11,10 +11,11 @@ namespace Project.Scripts.Gameplay.Zip.Configs
         [field: SerializeField] public Vector2Int Size { get; private set; }
         [field: SerializeField] public Vector2Int[] CheckpointPositions { get; private set; }
         [field: SerializeField] public ZipCellWallsConfig[] Walls { get; private set; }
+        [field: SerializeField] public float OrientedTimeToFinish { get; private set; } = 10;
 
         public int Width => Size.x;
         public int Height => Size.y;
-        public int MaxSize => Mathf.Max(Size.y,Size.x);
+        public int MaxSize => Mathf.Max(Size.y, Size.x);
 
         public ZipDefaultCell[,] GetCells()
         {
@@ -24,14 +25,17 @@ namespace Project.Scripts.Gameplay.Zip.Configs
                 for (int y = 0; y < Size.y; y++)
                 {
                     Vector2Int position = new Vector2Int(x, y);
-                    cells[x, y] = new ZipDefaultCell(ZipCellType.Empty, position,haveRightWall:HaveRightWall(position),haveDownWall:HaveDownWall(position));
+                    cells[x, y] = new ZipDefaultCell(ZipCellType.Empty, position,
+                        haveRightWall: HaveRightWall(position), haveDownWall: HaveDownWall(position));
                 }
             }
 
             for (var i = 0; i < CheckpointPositions.Length; i++)
             {
                 Vector2Int checkpointPosition = CheckpointPositions[i];
-                cells[checkpointPosition.x, checkpointPosition.y] = new ZipDefaultCell(ZipCellType.Checkpoint, checkpointPosition, i,haveRightWall:HaveRightWall(checkpointPosition),haveDownWall:HaveDownWall(checkpointPosition));
+                cells[checkpointPosition.x, checkpointPosition.y] = new ZipDefaultCell(ZipCellType.Checkpoint,
+                    checkpointPosition, i, haveRightWall: HaveRightWall(checkpointPosition),
+                    haveDownWall: HaveDownWall(checkpointPosition));
             }
 
 
@@ -44,14 +48,17 @@ namespace Project.Scripts.Gameplay.Zip.Configs
             {
                 if (wall.Position == position) return wall.HaveRightWall;
             }
+
             return false;
         }
+
         private bool HaveDownWall(Vector2Int position)
         {
             foreach (var wall in Walls)
             {
                 if (wall.Position == position) return wall.HaveDownWall;
             }
+
             return false;
         }
     }
@@ -68,7 +75,9 @@ namespace Project.Scripts.Gameplay.Zip.Configs
         public bool HaveDownWall => _haveDownWall;
 
         // Конструктор по умолчанию для сериализации Unity
-        public ZipCellWallsConfig() { }
+        public ZipCellWallsConfig()
+        {
+        }
 
         public ZipCellWallsConfig(Vector2Int position, bool haveRightWall, bool haveDownWall)
         {

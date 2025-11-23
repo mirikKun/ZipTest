@@ -22,7 +22,7 @@ namespace Project.Scripts.Gameplay.Zip.Configs
                 : new ZipLevelGenerator(_seed, _generationSettings);
 
             var levelData = generator.GenerateLevelData();
-            return new ZipBoardData(levelData.Size, levelData.CheckpointPositions, levelData.Walls);
+            return new ZipBoardData(levelData.Size, levelData.CheckpointPositions, levelData.Walls, levelData.OrientedTimeToFinish);
         }
     }
 }

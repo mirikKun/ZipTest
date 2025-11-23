@@ -36,7 +36,10 @@ namespace Project.Scripts.Infrastructure.Installers
             Container.BindInterfacesAndSelfTo<HomeScreenState>().AsSingle();
             
             Container.BindInterfacesAndSelfTo<LoadingZipGameSceneState>().AsSingle();
-            Container.BindInterfacesAndSelfTo<ZipGameState>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ZipGameState>().AsSingle();       
+            
+            Container.BindInterfacesAndSelfTo<LoadingZipEndlessGameSceneState>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ZipEndlessGameState>().AsSingle();
         }
 
 

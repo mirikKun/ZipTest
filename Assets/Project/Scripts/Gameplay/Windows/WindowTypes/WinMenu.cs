@@ -18,13 +18,17 @@ namespace Project.Scripts.Gameplay.Windows.WindowTypes
         [SerializeField] private TextMeshProUGUI _timeUsed;
         [SerializeField] private AnimationsHolder _winAnimation;
         [SerializeField] private WinStar[] _stars;
-        [SerializeField] private float _timeToMaxStars = 10f;
+        private bool _initialized;
 
-        
-        public void SetNextLevelButtonAction(UnityAction action)
+        public void Init(UnityAction openHomeScreen, UnityAction openNextLevel, UnityAction openCurrentLevel)
         {
-            _nextLevelButton.onClick.AddListener(action);
+            if (_initialized) return;
+            _initialized = true;
+            SetMainMenuButtons(openHomeScreen);
+            SetNextLevelButtonAction(openNextLevel);
+            SetRestartButtonAction(openCurrentLevel);
         }
+
 
         public void SetMainMenuButtons(UnityAction action)
         {
@@ -34,12 +38,17 @@ namespace Project.Scripts.Gameplay.Windows.WindowTypes
             }
         }
 
+        public void SetNextLevelButtonAction(UnityAction action)
+        {
+            _nextLevelButton.onClick.AddListener(action);
+        }
+
         public void SetRestartButtonAction(UnityAction action)
         {
             _restartButton.onClick.AddListener(action);
         }
 
-        public void SetData(float timeUsed)
+        public void SetData(float timeUsed,float timeToMaxStars)
         {
             int minutes = Mathf.FloorToInt(timeUsed / 60f);
             int seconds = Mathf.FloorToInt(timeUsed % 60f);
@@ -52,15 +61,15 @@ namespace Project.Scripts.Gameplay.Windows.WindowTypes
 
 
             _winAnimation.SetAnimationsStartState();
-            PlayAnimations(timeUsed).Forget();
+            PlayAnimations(timeUsed,timeToMaxStars).Forget();
         }
 
-        private async UniTask PlayAnimations(float timeUsed)
+        private async UniTask PlayAnimations(float timeUsed,float timeToMaxStars)
         {
             await _winAnimation.PlayAllAnimations();
             for (int i = 0; i < _stars.Length; i++)
             {
-                if (_timeToMaxStars * (i + 1) > timeUsed)
+                if (timeToMaxStars * (i + 1)/_stars.Length > timeUsed)
                 {
                     await UniTask.WaitForSeconds(_stars[i].Delay);
                     _stars[i].StarParticles.Play();

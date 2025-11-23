@@ -19,22 +19,36 @@ namespace Project.Scripts.Gameplay.EffectAnimations.Animations
 
 
             Vector3 endPosition;
+
             if (_useTransformTarget)
             {
                 endPosition = _targetPositionTransform.position;
                 _target.position = _startPositionTransform.position;
-
+                
+                if (_targetPositionTransform is RectTransform targetPositionRectTransform)
+                {
+                    endPosition = targetPositionRectTransform.anchoredPosition;
+                }
             }
             else
             {
                 endPosition = _targetPosition;
-                _target.position = _startPosition;
+                _target.localPosition = _startPosition;
 
             }
 
-            Tween tween = _useTransformTarget
-                ? _target.DOLocalMove(endPosition, _duration)
-                : _target.DOMove(endPosition, _duration);
+            Tween tween;
+            if (_target is RectTransform targetRectTransform)
+            {
+                tween = targetRectTransform.DOAnchorPos3D(endPosition, _duration);
+            }
+            else
+            {
+                tween = _useTransformTarget
+                    ? _target.DOLocalMove(endPosition, _duration)
+                    : _target.DOMove(endPosition, _duration);
+            }
+            
 
             if (_useCustomCurve && _customCurve != null && _customCurve.length > 0)
             {

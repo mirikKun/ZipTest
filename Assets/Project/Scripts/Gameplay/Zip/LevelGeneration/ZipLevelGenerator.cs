@@ -13,6 +13,7 @@ namespace Project.Scripts.Gameplay.Zip.LevelGeneration
         public Vector2Int Size;
         public Vector2Int[] CheckpointPositions;
         public ZipCellWallsConfig[] Walls;
+        public float OrientedTimeToFinish;
     }
 
     public class ZipLevelGenerator
@@ -34,6 +35,9 @@ namespace Project.Scripts.Gameplay.Zip.LevelGeneration
             
             [Header("Checkpoint Placement")]
             public bool RandomCheckpointPlacement = true; // If true, checkpoints are placed randomly (except first and last)
+            
+            [Header("Time Settings")]
+            [Range(0.1f, 2.0f)] public float TimePerCell = 0.4f; // Time multiplier per cell for expected completion time
         }
 
         private GenerationSettings _settings;
@@ -78,11 +82,16 @@ namespace Project.Scripts.Gameplay.Zip.LevelGeneration
             int checkpointCount = GenerateCheckpointCount(size);
             Vector2Int[] checkpointPositions = PlaceCheckpointsAlongPath(path, checkpointCount);
             
+            // Generate expected time: total cells * time per cell
+            int totalCells = size.x * size.y;
+            float orientedTimeToFinish = totalCells * _settings.TimePerCell;
+            
             return new LevelData
             {
                 Size = size,
                 CheckpointPositions = checkpointPositions,
-                Walls = new ZipCellWallsConfig[0] // No walls for now
+                Walls = new ZipCellWallsConfig[0], // No walls for now
+                OrientedTimeToFinish=orientedTimeToFinish
             };
         }
         

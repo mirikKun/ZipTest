@@ -8,7 +8,8 @@ namespace Project.Scripts.Gameplay.Windows.WindowTypes
 {
     public class MainMenuWindow:BaseWindow
     {
-        [SerializeField] private Button _startButton;
+        [SerializeField] private Button _startZipGameButton;
+        [SerializeField] private Button _startZipEndlessGameButton;
         [SerializeField] private Button _settingsButton;
         [SerializeField] private Button _exitButton;
         private IGameStateMachine _gameStateMachine;
@@ -23,7 +24,8 @@ namespace Project.Scripts.Gameplay.Windows.WindowTypes
 
         protected override void Initialize()
         {
-            _startButton.onClick.AddListener(OpenZipGame);
+            _startZipGameButton.onClick.AddListener(OpenZipGame);
+            _startZipEndlessGameButton.onClick.AddListener(OpenZipEndlessGame);
             _settingsButton.onClick.AddListener(OpenSettingsMenu);
             _exitButton.onClick.AddListener(Application.Quit);
         }
@@ -37,6 +39,10 @@ namespace Project.Scripts.Gameplay.Windows.WindowTypes
         private void OpenZipGame()
         {
             _gameStateMachine.Enter<LoadingZipGameSceneState>();
+        }
+        private void OpenZipEndlessGame()
+        {
+            _gameStateMachine.Enter<LoadingZipEndlessGameSceneState>();
         }
     }
 }

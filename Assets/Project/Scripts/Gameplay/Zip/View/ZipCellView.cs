@@ -23,6 +23,8 @@ namespace Project.Scripts.Gameplay.Zip.View
         private Tween _tween;
 
         public event Action<ZipDefaultCell, bool> OnCellClicked;
+        public event Action<ZipDefaultCell, bool> OnCellOver;
+        public  ZipLineView Line=>_line;
 
         public void InitCell(ZipDefaultCell cell, float size, Vector2Int boardSize)
         {
@@ -80,7 +82,7 @@ namespace Project.Scripts.Gameplay.Zip.View
         {
             if (Input.GetMouseButton(0))
             {
-                OnCellClicked?.Invoke(_cell, false);
+                OnCellOver?.Invoke(_cell, false);
             }
         }
 

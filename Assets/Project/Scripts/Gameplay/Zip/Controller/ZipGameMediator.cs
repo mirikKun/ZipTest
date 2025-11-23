@@ -9,7 +9,6 @@ using Project.Scripts.Infrastructure.Progress;
 using Project.Scripts.Infrastructure.States.GameStates;
 using Project.Scripts.Infrastructure.States.StateMachine;
 using UnityEngine;
-using UnityEngine.Events;
 using Zenject;
 
 namespace Project.Scripts.Gameplay.Zip.Controller
@@ -18,7 +17,7 @@ namespace Project.Scripts.Gameplay.Zip.Controller
     {
         [SerializeField] private ZipBoardView _board;
         [SerializeField] private ZipBoardEffects _boardEffects;
-        [SerializeField] private GameObject _hud;
+        [SerializeField] private TimerView _timer;
 
         private IStaticDataService _staticDataService;
         private IWindowService _windowService;
@@ -26,6 +25,12 @@ namespace Project.Scripts.Gameplay.Zip.Controller
 
         private ZipBoardConfigsList _boardConfigsList;
         private IGameStateMachine _gameStateMachine;
+
+        private float _timeUsed;
+        private bool _active;
+        private ZipBoardData _currentBoardData;
+
+        public float TimeUsed => _timeUsed;
 
         [Inject]
         private void Construct(IWindowService windowService, IStaticDataService staticDataService,
@@ -41,11 +46,18 @@ namespace Project.Scripts.Gameplay.Zip.Controller
         private void Start()
         {
             _board.BoardFinished += OnLevelFinished;
-            _hud.SetActive(false);
+            _timer.gameObject.SetActive(false);
 
             _boardConfigsList = _staticDataService.GetZipBoardConfigList();
             OpenCurrentLevel();
         }
+        private void Update()
+        {
+            if (!_active) return;
+            _timeUsed += Time.deltaTime;
+            _timer.UpdateTimer(_timeUsed);
+        }
+
 
         private void OnDestroy()
         {
@@ -62,9 +74,12 @@ namespace Project.Scripts.Gameplay.Zip.Controller
         private void OpenCurrentLevel()
         {
             _windowService.Hide(WindowId.WinPanel);
-            _hud.SetActive(true);
-            _board.CreateBoard(_boardConfigsList.GetLevelDataByIndex(_gameProgressService.GetZipLevelIndex()));
+            _timer.gameObject.SetActive(true);
+            _currentBoardData = _boardConfigsList.GetLevelDataByIndex(_gameProgressService.GetZipLevelIndex());
+            _board.CreateBoard(_currentBoardData);
             _boardEffects.PlayBoardAppearAnimation(Vector3.zero, Vector3.one);
+            _timeUsed = 0;
+            _active = true;
         }
 
         private void OpenHomeScreen()
@@ -72,22 +87,18 @@ namespace Project.Scripts.Gameplay.Zip.Controller
             _gameStateMachine.Enter<LoadingHomeScreenState>();
         }
 
-        private void OnLevelFinished(float timeUsed)
+        private async void OnLevelFinished()
         {
-            StartCoroutine(LevelFinishing(timeUsed));
-        }
-
-        private IEnumerator LevelFinishing(float timeUsed)
-        {
-            yield return _boardEffects.PlayFinishAnimation();
+            _active = false;
+            await _boardEffects.PlayFinishAnimation();
             _boardEffects.PlayBoardAppearAnimation(Vector3.one, Vector3.zero);
-            _hud.SetActive(false);
+            _timer.gameObject.SetActive(false);
             var winMenu = _windowService.Open<WinMenu>(WindowId.WinPanel);
-            winMenu.SetData(timeUsed);
+            winMenu.SetData(_timeUsed,_currentBoardData.OrientedTimeToFinish*3);
 
-            winMenu.SetMainMenuButtons(OpenHomeScreen);
-            winMenu.SetNextLevelButtonAction(OpenNextLevel);
-            winMenu.SetRestartButtonAction(OpenCurrentLevel);
+            winMenu.Init(OpenHomeScreen,OpenNextLevel,OpenCurrentLevel);
         }
+
+  
     }
 }

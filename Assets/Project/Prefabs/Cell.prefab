@@ -452,6 +452,7 @@ GameObject:
   m_Component:
   - component: {fileID: 383203655877892527}
   - component: {fileID: 4827969820922919522}
+  - component: {fileID: 4467026675289673248}
   m_Layer: 0
   m_Name: Line
   m_TagString: Untagged
@@ -512,6 +513,74 @@ MonoBehaviour:
     SpriteType: 4
   - Sprite: {fileID: 21300000, guid: e659bc64fdd252943a5d5143392082d4, type: 3}
     SpriteType: 2
+  _onClickAnimation:
+    _animations:
+    - _baseAnimation: {fileID: 4467026675289673248}
+      _delayBefore: 0
+      _delayAfter: 0
+      _playMode: 0
+--- !u!114 &4467026675289673248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6726406655509313015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018ca70cd88d36b438710697fa9ece94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.EffectAnimations.Animations.ScaleAnimation
+  _duration: 0.28
+  _easeType: 6
+  _customCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.44330144
+      outSlope: 0.44330144
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.17997803
+    - serializedVersion: 3
+      time: 0.2605763
+      value: 0.8923445
+      inSlope: 1.9357121
+      outSlope: 1.9357121
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4981079
+      value: 0.79471606
+      inSlope: -2.619899
+      outSlope: -2.619899
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.1469409
+    - serializedVersion: 3
+      time: 1.0013428
+      value: -0.000045776367
+      inSlope: -0.38975006
+      outSlope: -0.38975006
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.28471386
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _useCustomCurve: 1
+  _target: {fileID: 383203655877892527}
+  _startScale: {x: 0, y: 0, z: 0}
+  _targetScale: {x: 1.3, y: 1.3, z: 1}
+  _relativeScale: 0
+  _fromCurrentScale: 1
 --- !u!1 &7873768040055501961
 GameObject:
   m_ObjectHideFlags: 0

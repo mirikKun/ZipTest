@@ -167,7 +167,6 @@ namespace Project.Scripts.Gameplay.Zip.Board
                 if (_isOrderCorrect)
                 {
                     OrderBecameWrong?.Invoke();
-                    Debug.Log("Wrong order");
                 }
 
                 _isOrderCorrect = false;
